@@ -129,10 +129,10 @@ app.post('/createMeetings', async (req, res) => {
 //NEED TESTING
 app.patch("/updateMembers", async (req, res) => {
     try {
-        const {memberId ,members, projectId, projects} = req.body;
+        const {userId ,projectMembers, projectId, projects} = req.body;
 
-        await Project.updateOne({_id: projectId}, {projectMembers: members});
-        await User.updateOne({_id:memberId}, {allProjects: projects});
+        await Project.findByIdAndUpdate({_id: projectId}, {projectMembers: projectMembers});
+        await User.findByIdAndUpdate({_id:userId}, {allProjects: projects});
 
         res.json({status: "OK"})
     } catch (error) {
@@ -164,9 +164,21 @@ app.patch('/updateSchedule', async (req, res) => {
     }
 })
 
-app.get('/updateSchedule', async (req, res) => {
-    console.log('test')
+// UPDATE REQUESTS PATCH REQUEST
+app.patch('/updateMeetings', async (req, res) => {
+    try {
+        const {meetingId, meetingStartTime} = req.body;
+        // const newPassword = await bcrypt.hash(password, 10);
+        console.log(meetingStartTime);
+        await User.findByIdAndUpdate({_id: meetingId}, {meetingStartTime: meetingStartTime});
+        res.json({ status: 'OK' })
+        res.modifiedCount;
+        res.upsertedCount;
+    } catch (error) {
+        res.json({ status: 'error', error: error.message })
+    }
 })
+
 
 // GET SCHEDULE
 app.get('/getSchedule/', async(req,res) =>{
@@ -197,6 +209,18 @@ app.get('/getProjects/', async(req,res) =>{
 
 // GET LIST OF PROJECTS
 app.get('/getTasks/', async(req,res) =>{
+    try {
+        const projectId = req.body.id;
+        // const newPassword = await bcrypt.hash(password, 10);
+        const allProjects = await User.findById({_id: userId}, 'allProjects')
+        res.json({status:'OK', allProjects: allProjects});
+    } catch (error) {
+        res.json({ status: 'error', error: error.message })
+    }
+})
+
+// GET LIST OF MEETINGS
+app.get('/getMeetings/', async(req,res) =>{
     try {
         const projectId = req.body.id;
         // const newPassword = await bcrypt.hash(password, 10);
@@ -271,11 +295,16 @@ bot.onText(/what are my tasks/, (msg, match) => {
     // 'msg' is the received Message from Telegram
     // 'match' is the result of executing the regexp above on the text content
     // of the message
-    text = ''
-    text += 
-    bot.sendMessage(chatId, `Your task: BC2407 Analytics Proposal is due tomorrow. Please remember to finish it!`);
+    bot.sendMessage(chatId, 'Research on CC0006 Topics\nWrite two problems within the proposal\nWrite a solution within the proposal');
 });
 
+bot.onText(/meeting/, (msg, match) => {
+    const chatId = msg.chat.id;
+    // 'msg' is the received Message from Telegram
+    // 'match' is the result of executing the regexp above on the text content
+    // of the message
+    bot.sendMessage(chatId, "Reminder: ML0004 Meeting tomorrow!");
+});
 
 // const sendReminder = (chatId, message) => {
 
