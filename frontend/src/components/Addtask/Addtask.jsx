@@ -19,7 +19,7 @@ function Addtask () {
 
     return (
         <div>
-            <Button sx={{m:1, bgcolor:"#E98074"}} variant="contained" onClick={openModal}>Add tasks</Button>
+            <Button sx={{m:1, bgcolor:"#E98074", ":hover":{bgcolor:"#e9bb74"}}} variant="contained" onClick={openModal}>Add tasks</Button>
             <Dialog open={modal} onClose={closeModal}>
                 <form onSubmit={addTask} autoComplete="off" style={{backgroundColor:"#EAE7DC"}}>
                     <DialogTitle>Add tasks</DialogTitle>
