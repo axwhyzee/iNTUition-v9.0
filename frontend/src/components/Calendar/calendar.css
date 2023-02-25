@@ -49,3 +49,23 @@
 .calendar-cell-dark {
     background-color: rgba(0, 86, 34, 0.564);
 }
+
+.save-calendar {
+    background-color: rgb(0, 198, 69);
+    color: #333;
+    text-align: center;
+    float: right;
+    font-weight: bold;
+    padding: 10px 40px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 20px;
+    transition: .5s;
+}
+
+.save-calendar:hover {
+    background-color: rgb(17, 154, 65);
+    color: aliceblue;
+    border-radius: 10px;
+    cursor: pointer;
+}
