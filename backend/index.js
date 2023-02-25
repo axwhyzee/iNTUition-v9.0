@@ -3,6 +3,13 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './mongodb/connect.js';
 import TelegramBot from 'node-telegram-bot-api';
+import  jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import userModel from './mongodb/models/user.js';
+import User from './mongodb/models/user.js';
+// import userRouter from './routes/user.routes.js';
+// import projectRouter from './routes/project.routes.js';
+// import taskRouter from './routes/task.routes.js';
 
 dotenv.config();
 const token = process.env.JIRAJI_BOT_KEY;
@@ -13,6 +20,50 @@ app.use(express.json({limit:'50mb'}));
 app.get('/',(req,res) =>{
     res.send({message:"hello world"});
 })
+// app.use("/login", userRouter);
+// app.use("/signup", userRouter);
+// app.use("/", projectRouter);
+// app.use("/tasks", taskRouter);
+
+app.post('/signup', async (req,res)=>{
+    try{
+        const {username,password, allProjects} = req.body;
+        const newPassword = await bcrypt.hash(password,10);
+        
+        await User.create({
+            username,
+            password,
+            allProjects // supposed to be anempty projects list
+        })
+        res.json({status:'OK'})
+    }catch(error){
+        res.json({status: 'error', error: error.message})
+    }
+})
+
+app.post('/login', async (req,res)=>{
+        const user = await User.findOne({email:req.body.email});
+        if(!user){
+            return {
+                status:'error',
+                error:'Invalid Login'
+            }
+        }
+        const isPasswordValid = await bcrypt.compare(req.body.password, user.password)
+        if( isPasswordValid){
+            const token = jwt.sign(
+                {
+                    username:user.username,           
+                    projects:user.projects     
+                }
+            )
+            return res.json({status:'OK ', user:token})
+        }else{
+            return res.json({status:'Error',user:false})
+        }
+
+})
+
 
 const startServer = async() =>{
     try{    
