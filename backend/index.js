@@ -7,6 +7,7 @@ import User from './mongodb/models/user.js';
 import Project from './mongodb/models/project.js';
 import Task from './mongodb/models/task.js';
 import Meeting from './mongodb/models/meeting.js';
+import fetch from 'node-fetch';
 
 dotenv.config();
 const token = process.env.JIRAJI_BOT_KEY;
@@ -198,7 +199,7 @@ app.get('/getSchedule/', async (req, res) => {
 // GET LIST OF PROJECTS
 app.get('/getProjects/', async (req, res) => {
     try {
-        const userId = req.body.id;
+        const userId = req.query.id;
         // const newPassword = await bcrypt.hash(password, 10);
         const allProjects = await User.findById({ _id: userId }, 'allProjects')
         res.json({ status: 'OK', allProjects: allProjects });
@@ -207,13 +208,13 @@ app.get('/getProjects/', async (req, res) => {
     }
 })
 
-// GET LIST OF PROJECTS
-app.get('/getTasks/', async (req, res) => {
+// GET LIST OF TASKS
+app.get('/getTasks/', async(req,res) =>{
     try {
-        const projectId = req.body.id;
+        const projectId = req.query.id;
         // const newPassword = await bcrypt.hash(password, 10);
-        const allProjects = await User.findById({ _id: userId }, 'allProjects')
-        res.json({ status: 'OK', allProjects: allProjects });
+        const allTasks = await Project.findById({_id: projectId}, 'allTasks')
+        res.json({status:'OK', allTasks: allTasks});
     } catch (error) {
         res.json({ status: 'error', error: error.message })
     }
@@ -222,14 +223,73 @@ app.get('/getTasks/', async (req, res) => {
 // GET LIST OF MEETINGS
 app.get('/getMeetings/', async(req,res) =>{
     try {
-        const projectId = req.body.id;
+        const projectId= req.query.id;
         // const newPassword = await bcrypt.hash(password, 10);
-        const allProjects = await User.findById({_id: userId}, 'allProjects')
-        res.json({status:'OK', allProjects: allProjects});
+        const allMeetings = await Project.findById({_id: projectId}, 'projectMeetings')
+        res.json({status:'OK', allMeetings: allMeetings});
     } catch (error) {
         res.json({ status: 'error', error: error.message })
     }
 })
+
+// DELETE PROJECT
+app.delete('/deleteProject/', async(req,res) =>{
+    try {
+        const {projectId} = req.body;
+        // const newPassword = await bcrypt.hash(password, 10);
+        // const allProjects = await User.findById.select({allProjects:1, _id:0});
+        // console.log(allProjects);
+        // const filtered = allProjects.filter(function(project,index,arr){
+        //     return project._id != projectId;
+        // })
+        // console.log(filtered);
+        // // await User.findOneAndDelete({_id:}
+        await Project.deleteOne({_id: projectId})
+        res.json({status:'OK'});
+    } catch (error) {
+        res.json({ status: 'error', error: error.message })
+    }
+})
+
+// DELETE MEETINGS
+app.delete('/deleteMeeting/', async(req,res) =>{
+    try {
+        const {meetingId} = req.body;
+        // const newPassword = await bcrypt.hash(password, 10);
+        // const allProjects = await User.findById.select({allProjects:1, _id:0});
+        // console.log(allProjects);
+        // const filtered = allProjects.filter(function(project,index,arr){
+        //     return project._id != projectId;
+        // })
+        // console.log(filtered);
+        // // await User.findOneAndDelete({_id:}
+        await Meeting.deleteOne({_id: meetingId})
+        res.json({status:'OK'});
+    } catch (error) {
+        res.json({ status: 'error', error: error.message })
+    }
+})
+
+// DELETE TASKS
+app.delete('/deleteTask/', async(req,res) =>{
+    try {
+        const {taskId} = req.body;
+        // const newPassword = await bcrypt.hash(password, 10);
+        // const allProjects = await User.findById.select({allProjects:1, _id:0});
+        // console.log(allProjects);
+        // const filtered = allProjects.filter(function(project,index,arr){
+        //     return project._id != projectId;
+        // })
+        // console.log(filtered);
+        // // await User.findOneAndDelete({_id:}
+        await Task.deleteOne({_id: taskId})
+        res.json({status:'OK'});
+    } catch (error) {
+        res.json({ status: 'error', error: error.message })
+    }
+})
+
+
 
 const startServer = async () => {
     try {
@@ -242,6 +302,9 @@ const startServer = async () => {
         console.log(error);
     }
 }
+
+
+
 
 // -----------------------------------------------------------
 // //                TELEGRAM BOT 
@@ -306,8 +369,8 @@ bot.onText(/meeting/, (msg, match) => {
     bot.sendMessage(chatId, "Reminder: ML0004 Meeting tomorrow!");
 });
 
-// const sendReminder = (chatId, message) => {
-
-// }
+// fetch data
+const response = await fetch("https://intuition.onrender.com/meetingTime");
+console.log(response);
 
 startServer();
