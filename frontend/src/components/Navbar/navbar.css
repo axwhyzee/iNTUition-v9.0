@@ -21,7 +21,7 @@
 }
 
 .nav-btn::after {
-    height: 2px;
+    height: 3px;
     background-color: #E98074;
     content: '';
     position: absolute;
@@ -30,7 +30,6 @@
     right: 15px;
     transform: scaleX(0);
     transition: .5s;
-
 }
 
 .nav-btn:hover::after {
