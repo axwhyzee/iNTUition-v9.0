@@ -142,11 +142,11 @@ app.patch("/updateMembers", async (req, res) => {
 
 //ADD MEETINGS TO PROJECT PATCH REQUEST
 //NEED TESTING
-app.patch("/updateMeetings", async (req, res) => {
-    try {
-        const {}
-    }
-})
+// app.patch("/updateMeetings", async (req, res) => {
+//     try {
+//         const {}
+//     }
+// })
 
 // UPDATE REQUESTS PATCH REQUEST
 app.patch('/updateSchedule', async (req, res) => {
@@ -178,46 +178,46 @@ const startServer = async () => {
 }
 
 // -----------------------------------------------------------
-//                TELEGRAM BOT 
-// -----------------------------------------------------------
+// //                TELEGRAM BOT 
+// // -----------------------------------------------------------
 
-// // Create a bot that uses 'polling' to fetch new updates
-const bot = new TelegramBot(token, { polling: true });
-
-
-// replace the value below with the Telegram token you receive from @BotFather
-if (process.env.NODE_ENV === 'production') {
-    const bot = new TelegramBot(token);
-    bot.setWebHook(process.env.HEROKU_URL + bot.token);
-} else {
-    // const bot = new TelegramBot(token, {polling: true});
-}
+// // // Create a bot that uses 'polling' to fetch new updates
+// const bot = new TelegramBot(token, { polling: true });
 
 
-
-// Listen for any kind of message. There are different kinds of
-// messages.
-
-bot.on('message', (msg) => {
-    const chatId = msg.chat.id;
-
-    // send a message to the chat acknowledging receipt of their message
-    bot.sendMessage(chatId, 'Jiraji-Bot connected.');
-});
+// // replace the value below with the Telegram token you receive from @BotFather
+// if (process.env.NODE_ENV === 'production') {
+//     const bot = new TelegramBot(token);
+//     bot.setWebHook(process.env.HEROKU_URL + bot.token);
+// } else {
+//     // const bot = new TelegramBot(token, {polling: true});
+// }
 
 
-bot.onText(/\/connect/, (msg, match) => {
-    const chatId = msg.chat.id;
-    // 'msg' is the received Message from Telegram
-    // 'match' is the result of executing the regexp above on the text content
-    // of the message
 
-    console.log(chatId)
+// // Listen for any kind of message. There are different kinds of
+// // messages.
 
-});
+// bot.on('message', (msg) => {
+//     const chatId = msg.chat.id;
 
-const sendReminder = (chatId, message) => {
+//     // send a message to the chat acknowledging receipt of their message
+//     bot.sendMessage(chatId, 'Jiraji-Bot connected.');
+// });
 
-}
+
+// bot.onText(/\/connect/, (msg, match) => {
+//     const chatId = msg.chat.id;
+//     // 'msg' is the received Message from Telegram
+//     // 'match' is the result of executing the regexp above on the text content
+//     // of the message
+
+//     console.log(chatId)
+
+// });
+
+// const sendReminder = (chatId, message) => {
+
+// }
 
 startServer();
