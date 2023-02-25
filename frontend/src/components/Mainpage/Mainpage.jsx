@@ -9,7 +9,7 @@ import Addmeeting from "../Addmeeting/Addmeeting";
 function Mainpage() {
     const [tasks, setTasks] = useState(["task 1", "task 2", "task 3"]);
     const [completed, setCompleted] = useState([]);
-    const [meetings, setMeetings] = useState([{"title": "meeting 1", "date": Date(1/3/2023), "time": "9:00 PM", "link":"zoom.com", "pwd":"1234"}]);
+    const [meetings, setMeetings] = useState([{"title": "meeting 1", "date": new Date("2023-3-1"), "time": "9:00 PM", "link":"zoom.com", "pwd":"1234"}]);
 
     //retrieve from backend
     const deletetask = (e) => {
@@ -59,23 +59,29 @@ function Mainpage() {
                         })}
                     </div>
                 </Paper>
-                <Paper className="single-board" elevation={2}>
+                <Paper className="single-board-meeting" elevation={2}>
                     <div className="board-title">Upcoming meetings</div>
                     <div className="board-content">
                     <FormGroup row={false}>
                         {meetings.map(x => {
-                            if (x.date >= Date.now()) {
+                            const now = new Date();
+                            console.log(x.date.getDate())
+                            if (x.date.getMonth() > now.getMonth() || (x.date.getMonth() === now.getMonth() && x.date.getDate() >= now.getDate())) {
                                 return(
                                     <div>
+                                        <div style={{display:"flex", flexDirection:"row"}}>
                                         <Checkbox value={x} checked={false} name={x} onChange={deletemeeting}/>
-                                        <Typography variant="h4" >{x.title}</Typography><br/>
-                                        <Typography variant="h5" >{x.time}</Typography><br/>
-                                        <Typography variant="h6" >{x.link}</Typography>&nbsp&nbsp&nbsp&nbsp
-                                        <Typography variant="h6">{x.pwd}</Typography>
+                                        <Typography variant="h4" >{x.title}</Typography>
+                                        </div>
+                                        <Typography variant="h5" >{x.time}</Typography>
+                                        <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+                                        <Typography variant="h7" >{x.link}</Typography><nbsp /><nbsp /><nbsp /><nbsp />
+                                        <Typography variant="h7">{x.pwd}</Typography>
+                                        </div>
                                     </div>
                                 )
                             }
-                            return;
+                            return null;
                         })}
                     </FormGroup>
                     </div>
