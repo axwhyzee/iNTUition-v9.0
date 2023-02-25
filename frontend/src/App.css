@@ -8,4 +8,17 @@ body {
     margin: 0;
     padding: 0;
     padding-top: 74px;
+    padding-left: 200px;
+}
+
+.main-wrapper {
+    padding: 30px;
+}
+
+.project-desc {
+    color: #555;
+}
+
+.btn-wrapper {
+    display: flex;
 }

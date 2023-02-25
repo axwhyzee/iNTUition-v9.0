@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../Navbar/Navbar';
-import Sidebar from '../Sidebar/Sidebar';
 import './calendar.css';
 
 function Calendar() {
@@ -9,7 +7,6 @@ function Calendar() {
     const [endTime, setEndTime] = useState(23 * 60 + 30);
     const [mouseState, setMouseState] = useState(false);
     const today = (new Date()).getTime();
-    let mouseDown = false;
 
     function filterByTime(entry) {
         return entry[1][0] >= startTime && entry[1][0] <= endTime;
@@ -18,7 +15,7 @@ function Calendar() {
         const calendarObj = {};
         for (let hour = 0; hour <= 23; hour += 1) {
             for (let minute = 0; minute < 60; minute += 15) {
-                calendarObj[('0' + hour).substr(-2) + ':' + ('0' + minute).substr(-2)] = [hour * 60 + minute, 0, 0, 0, 0, 0, 1, 0];
+                calendarObj[('0' + hour).substr(-2) + ':' + ('0' + minute).substr(-2)] = [hour * 60 + minute, 0, 0, 0, 0, 0, 0, 0];
             }
         }
         setCalendar(calendarObj);
@@ -47,8 +44,6 @@ function Calendar() {
 
     return (
         <main className='calendar-wrapper'>
-            <Navbar/>
-            <Sidebar/>
             <table className='calendar'>
                 <tbody>
                     <tr>
