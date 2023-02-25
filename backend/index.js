@@ -69,9 +69,9 @@ app.post('/login', async (req, res) => {
 // CREATE PROJECTS POST REQUEST
 app.post('/createProject', async (req, res) => {
     try {
-        const { projectName, projectDescription, telegramChatId, allTasks, projectMembers, projectMeetings } = req.body;
+        const { projectName, projectDescription, allTasks, projectMembers, projectMeetings } = req.body;
         // const newPassword = await bcrypt.hash(password, 10);
-
+        const telegramChatId = '-1234567';
         await Project.create({
             projectName,
             projectDescription,
@@ -89,15 +89,15 @@ app.post('/createProject', async (req, res) => {
 // CREATE TASKS POST REQUEST
 app.post('/createTask', async (req, res) => {
     try {
-        const { project, telegramChatId, description, dueDate, isCompleted, allocatedUser } = req.body;
+        const { project, description, dueDate, allocatedUser } = req.body;
         // const newPassword = await bcrypt.hash(password, 10);
-
+        
+        const telegramChatId = project.telegramChatId;
         await Task.create({
             project,
             telegramChatId,
             description, // supposed to be anempty projects list
             dueDate,
-            isCompleted,
             allocatedUser
         })
         res.json({ status: 'OK' })
@@ -163,7 +163,32 @@ app.patch('/updateSchedule', async (req, res) => {
     }
 })
 
+// GET SCHEDULE
+app.get('/getSchedule/', async(req,res) =>{
+    console.log('test');
+    try{
+        const userId = req.query.id;
+        console.log(userId);
+        // console.log(typeof(userId));
+        const userSchedule = await User.findById({_id:userId}, 'schedule');
+        res.json({status:'OK', schedule:userSchedule});
+    }
+    catch(error){   
+        res.json({status:'error', error:error.message})
+    }
+})
 
+// GET LIST OF PROJECTS
+app.get('/getProjects/', async(req,res) =>{
+    try {
+        const {userId} = req.query.id;
+        // const newPassword = await bcrypt.hash(password, 10);
+        const allProjects = await User.findById({_id: userId}, 'allProjects')
+        res.json({status:'OK', allProjects: allProjects});
+    } catch (error) {
+        res.json({ status: 'error', error: error.message })
+    }
+})
 
 const startServer = async () => {
     try {

@@ -1,6 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import './Login.css';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Login = () => {
     console.log(username, password)
   }
 
-  const lgin =() => {
+  const lgin = () => {
     setLogin(true);
   }
 
@@ -23,33 +24,69 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <Button sx={{bgcolor:login ? "#E98074" : "#D8C3A5"}} onClick={lgin}>Login</Button><Button sx={{bgcolor:login ? "#D8C3A5" : "#E98074"}} onClick={sgnup}>Signup!</Button>
-      {login ? <form className="login" onSubmit={handleSubmit}>
-      <h3>Log In</h3>
-      
-      <TextField 
-        onChange={(e) => setUsername(e.target.value)} 
-        value={username} variant="outlined" id="Username" name="username" label='Username'/>
-      
-      <TextField 
-        onChange={(e) => setPassword(e.target.value)} 
-        value={password} variant="outlined" id="Password" name="password" label='Password'/>
+    <div class="container">
+      <div class="form-container log-in-container">
+        <div>
+          <Button sx={{ bgcolor: login ? "#fae4b1" : "#fffaef" }} onClick={lgin}>Login</Button>
+          <Button sx={{ bgcolor: login ? "#fffaef" : "#fae4b1" }} onClick={sgnup}>Signup!</Button>
+        </div>
+        {login ? <form className="login" onSubmit={handleSubmit}>
+          <h3>Log In</h3>
 
-      <Button variant="contained" bgcolor="#E98074" onClick={() => {navigate("/home")}}>Log in</Button></form> : <form className="signup" onSubmit={handleSubmit}>
-      <h3>Sign Up</h3>
-      
-      <TextField 
-        onChange={(e) => setUsername(e.target.value)} 
-        value={username} variant="outlined" id="Username" name="username" label='Username'/>
-      
-      <TextField 
-        onChange={(e) => setPassword(e.target.value)} 
-        value={password} variant="outlined" id="Password" name="password" label='Password'/>
+          <TextField
+            onChange={(e) => setUsername(e.target.value)}
+            value={username} variant="outlined" id="Username" name="username" label='Username' />
 
-      <Button variant="contained" bgcolor="#E98074" onClick={() => {navigate("/home")}}>Sign up</Button>
-    </form>}
+          <TextField
+            onChange={(e) => setPassword(e.target.value)}
+            value={password} variant="outlined" id="Password" name="password" label='Password' />
+
+          <button variant="contained" className="login-btn" onClick={() => { navigate("/home") }}>Log in</button></form>
+          : <form className="signup" onSubmit={handleSubmit}>
+            <h3>Sign Up</h3>
+
+            <TextField
+              onChange={(e) => setUsername(e.target.value)}
+              value={username} variant="outlined" id="Username" name="username" label='Username' />
+
+            <TextField
+              onChange={(e) => setPassword(e.target.value)}
+              value={password} variant="outlined" id="Password" name="password" label='Password' />
+
+            <button variant="contained" className="login-btn" onClick={() => { navigate("/home") }}>Sign up</button>
+          </form>}
+      </div>
+      <div class="overlay-container">
+      </div>
     </div>
+
+    /*<div>
+        <Button sx={{ bgcolor: login ? "#E98074" : "#D8C3A5" }} onClick={lgin}>Login</Button><Button sx={{ bgcolor: login ? "#D8C3A5" : "#E98074" }} onClick={sgnup}>Signup!</Button>
+        {login ? <form className="login" onSubmit={handleSubmit}>
+          <h3>Log In</h3>
+  
+          <TextField
+            onChange={(e) => setUsername(e.target.value)}
+            value={username} variant="outlined" id="Username" name="username" label='Username' />
+  
+          <TextField
+            onChange={(e) => setPassword(e.target.value)}
+            value={password} variant="outlined" id="Password" name="password" label='Password' />
+  
+          <Button variant="contained" bgcolor="#E98074" onClick={() => { navigate("/home") }}>Log in</Button></form> : <form className="signup" onSubmit={handleSubmit}>
+          <h3>Sign Up</h3>
+  
+          <TextField
+            onChange={(e) => setUsername(e.target.value)}
+            value={username} variant="outlined" id="Username" name="username" label='Username' />
+  
+          <TextField
+            onChange={(e) => setPassword(e.target.value)}
+            value={password} variant="outlined" id="Password" name="password" label='Password' />
+  
+          <Button variant="contained" bgcolor="#E98074" onClick={() => { navigate("/home") }}>Sign up</Button>
+        </form>}
+      </div>*/
   )
 }
 
