@@ -26,7 +26,9 @@ function Addtask () {
                         <DialogContent>
                             <FormGroup row={false} sx={{"& .MuiTextField-root":{my:0.5}}}>
                                 <TextField variant="outlined" id="Description" name="description" label='Description'/>
-                                <TextField variant="outlined" id="Due date" name="duedate" type="date"/>
+                                <TextField variant="outlined" id="Due date" name="duedate" label="Due Date" InputLabelProps={{
+          shrink: true,
+        }} type="date"/>
                                 <TextField variant="outlined" id="Assignedmem" name="assignedmem" label='Assigned member'/>
                             </FormGroup>
                     </DialogContent>
