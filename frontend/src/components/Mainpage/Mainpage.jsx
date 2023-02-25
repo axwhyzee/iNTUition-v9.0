@@ -40,6 +40,19 @@ function Mainpage() {
         const obj = {"title": f.get("title"), "date":new Date(f.get("date")), "time":f.get("time"), "link":f.get("link"), "pwd":f.get("pwd")};
         const temp = [...meetings, obj];
         setMeetings(temp);
+
+        console.log(fetch("https://intuition.onrender.com/meetingTime/", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: {
+                'title': obj.title,
+                'date': obj.date,
+                "time": obj.time
+            },
+        }));
     }
 
     return (
@@ -63,7 +76,7 @@ function Mainpage() {
                                 return (
                                     <div>
                                         <div style={{ display: "flex", flexDirection: "row" }}>
-                                            <Checkbox value={x} checked={false} name={x} onChange={deletemeeting} />
+                                            <Checkbox icon={<ClearIcon/>} value={x} checked={false} name={x} onChange={deletemeeting} />
                                             <Typography variant="h4" >{x.title}</Typography>
                                         </div>
                                         <Typography variant="h5" >{x.time}</Typography>
@@ -109,33 +122,6 @@ function Mainpage() {
                                 <Typography sx={{ textDecoration: "line-through" }}>{c}</Typography>
                             )
                         })}
-                    </div>
-                </Paper>
-                <Paper className="single-board-meeting" elevation={2}>
-                    <div className="board-title">Upcoming meetings</div>
-                    <div className="board-content">
-                        <FormGroup row={false}>
-                            {meetings.map(x => {
-                                const now = new Date();
-                                console.log(x.date.getDate())
-                                if (x.date.getMonth() > now.getMonth() || (x.date.getMonth() === now.getMonth() && x.date.getDate() >= now.getDate())) {
-                                    return (
-                                        <div>
-                                            <div style={{ display: "flex", flexDirection: "row" }}>
-                                                <Checkbox value={x} checked={false} name={x} onChange={deletemeeting} />
-                                                <Typography variant="h4" >{x.title}</Typography>
-                                            </div>
-                                            <Typography variant="h5" >{x.time}</Typography>
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                                                <Link variant="h7" href={x.link}>Meeting link</Link>
-                                                <Typography variant="h7">Password: {x.pwd}</Typography>
-                                            </div>
-                                        </div>
-                                    )
-                                }
-                                return null;
-                            })}
-                        </FormGroup>
                     </div>
                 </Paper>
             </div>
