@@ -7,9 +7,15 @@
 .calendar {
     width: 100%;
     border-collapse: collapse;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }
 
 .calendar-header {
+    font-size: 10px;
     padding: 10px 0;
 }
 
@@ -17,6 +23,12 @@
     width: 50px;
     height: 10px;
     border: 0;
+    transition: .2s;
+}
+
+.calendar-cell:hover {
+    background-color: #09603499;
+    cursor: pointer;
 }
 
 .calendar-cell-timing {
@@ -34,6 +46,6 @@
     background-color: rgba(134, 205, 134, 0.43);
 }
 
-.calendar-cell-red {
-    background-color: rgba(236, 126, 107, 0.463);
+.calendar-cell-dark {
+    background-color: rgba(0, 86, 34, 0.564);
 }
