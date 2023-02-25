@@ -129,10 +129,10 @@ app.post('/createMeetings', async (req, res) => {
 //NEED TESTING
 app.patch("/updateMembers", async (req, res) => {
     try {
-        const { memberId, members, projectId, projects } = req.body;
+        const {userId ,projectMembers, projectId, projects} = req.body;
 
-        await Project.updateOne({ _id: projectId }, { projectMembers: members });
-        await User.updateOne({ _id: memberId }, { allProjects: projects });
+        await Project.findByIdAndUpdate({_id: projectId}, {projectMembers: projectMembers});
+        await User.findByIdAndUpdate({_id:userId}, {allProjects: projects});
 
         res.json({ status: "OK" })
     } catch (error) {
@@ -151,11 +151,11 @@ app.patch("/updateMembers", async (req, res) => {
 // UPDATE REQUESTS PATCH REQUEST
 app.patch('/updateSchedule', async (req, res) => {
     try {
-        const { userId, schedule } = req.body;
+        console.log('test');
+        const {userId, schedule} = req.body;
         // const newPassword = await bcrypt.hash(password, 10);
-        console.log(userId, schedule);
-        await User.updateOne({ _id: userId }, { schedule: schedule })
-
+        console.log(schedule);
+        await User.findByIdAndUpdate({_id: userId}, {schedule: schedule});
         res.json({ status: 'OK' })
         res.modifiedCount;
         res.upsertedCount;
@@ -163,6 +163,22 @@ app.patch('/updateSchedule', async (req, res) => {
         res.json({ status: 'error', error: error.message })
     }
 })
+
+// UPDATE REQUESTS PATCH REQUEST
+app.patch('/updateMeetings', async (req, res) => {
+    try {
+        const {meetingId, meetingStartTime} = req.body;
+        // const newPassword = await bcrypt.hash(password, 10);
+        console.log(meetingStartTime);
+        await User.findByIdAndUpdate({_id: meetingId}, {meetingStartTime: meetingStartTime});
+        res.json({ status: 'OK' })
+        res.modifiedCount;
+        res.upsertedCount;
+    } catch (error) {
+        res.json({ status: 'error', error: error.message })
+    }
+})
+
 
 // GET SCHEDULE
 app.get('/getSchedule/', async (req, res) => {
@@ -203,6 +219,18 @@ app.get('/getTasks/', async (req, res) => {
     }
 })
 
+// GET LIST OF MEETINGS
+app.get('/getMeetings/', async(req,res) =>{
+    try {
+        const projectId = req.body.id;
+        // const newPassword = await bcrypt.hash(password, 10);
+        const allProjects = await User.findById({_id: userId}, 'allProjects')
+        res.json({status:'OK', allProjects: allProjects});
+    } catch (error) {
+        res.json({ status: 'error', error: error.message })
+    }
+})
+
 const startServer = async () => {
     try {
         connectDB('mongodb+srv://wchong036:ninabedog1@cluster0.9nhomnm.mongodb.net/?retryWrites=true&w=majority');
@@ -221,7 +249,7 @@ const startServer = async () => {
 
 
 // // Create a bot that uses 'polling' to fetch new updates
-// const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token, { polling: true });
 
 
 // // replace the value below with the Telegram token you receive from @BotFather
@@ -237,23 +265,46 @@ const startServer = async () => {
 // // Listen for any kind of message. There are different kinds of
 // // messages.
 
-// bot.on('message', (msg) => {
-//     const chatId = msg.chat.id;
+bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
 
-//     // send a message to the chat acknowledging receipt of their message
-//     bot.sendMessage(chatId, 'Jiraji-Bot connected.');
-// });
+    // send a message to the chat acknowledging receipt of their message
+    // bot.sendMessage(chatId, 'Jiraji-Bot connected.');
+});
 
 
-// bot.onText(/\/connect/, (msg, match) => {
-//     const chatId = msg.chat.id;
-//     // 'msg' is the received Message from Telegram
-//     // 'match' is the result of executing the regexp above on the text content
-//     // of the message
+bot.onText(/\/connect/, (msg, match) => {
+    const chatId = msg.chat.id;
+    // 'msg' is the received Message from Telegram
+    // 'match' is the result of executing the regexp above on the text content
+    // of the message
+    console.log(chatId);
+    bot.sendMessage(chatId, 'Jiraji-Bot connected.');
+});
 
-//     console.log(chatId)
+bot.onText(/when is the task due/, (msg, match) => {
+    const chatId = msg.chat.id;
+    // 'msg' is the received Message from Telegram
+    // 'match' is the result of executing the regexp above on the text content
+    // of the message
+    bot.sendMessage(chatId, `Your task: BC2407 Analytics Proposal is due tomorrow. Please remember to finish it!`);
+});
 
-// });
+bot.onText(/what are my tasks/, (msg, match) => {
+    const chatId = msg.chat.id;
+    // 'msg' is the received Message from Telegram
+    // 'match' is the result of executing the regexp above on the text content
+    // of the message
+    bot.sendMessage(chatId, 'Research on CC0006 Topics\nWrite two problems within the proposal\nWrite a solution within the proposal');
+});
+
+bot.onText(/meeting/, (msg, match) => {
+    const chatId = msg.chat.id;
+    // 'msg' is the received Message from Telegram
+    // 'match' is the result of executing the regexp above on the text content
+    // of the message
+    bot.sendMessage(chatId, "Reminder: ML0004 Meeting tomorrow!");
+});
 
 // const sendReminder = (chatId, message) => {
 
