@@ -20,7 +20,8 @@
   transition: box-shadow .2s,-ms-transform .1s,-webkit-transform .1s,transform .1s;
   user-select: none;
   -webkit-user-select: none;
-  width: auto;
+  width: 150px;
+  margin: 1%;
 }
 
 .proj-com:focus-visible {
