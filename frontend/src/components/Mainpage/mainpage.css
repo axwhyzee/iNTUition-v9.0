@@ -1,19 +1,27 @@
+.kanban-hr {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.285);
+    margin: 20px 0;
+}
+
 .kanban-board {
     display: flex;
     margin: 0 auto;
     margin-top: 20px;
     padding-top: 30px;
-    border-top: 2px solid #b7b7b7;
 }
 
 .single-board {
     background: transparent !important;
-    margin: 0 10px;
+    margin: 0 20px;
+    flex: 1;
 }
+
 .single-board-meeting {
     background: transparent !important;
-    margin: 0 10px;
-    flex:1;
+    margin: 30px 10px;
+    flex: 1;
 }
 
 .board-title {
@@ -26,4 +34,8 @@
 
 .board-content {
     padding: 20px 40px;
+}
+
+.full-width {
+    width: 100%;
 }

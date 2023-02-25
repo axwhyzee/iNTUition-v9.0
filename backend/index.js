@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 // SIGN UP POST REQUEST
 app.post('/signup', async (req, res) => {
     try {
-        const { username, password, allProjects,schedule } = req.body;
+        const { username, password, allProjects, schedule } = req.body;
         // const newPassword = await bcrypt.hash(password, 10);
 
         await User.create({
@@ -91,7 +91,7 @@ app.post('/createTask', async (req, res) => {
     try {
         const { project, description, dueDate, allocatedUser } = req.body;
         // const newPassword = await bcrypt.hash(password, 10);
-        
+
         const telegramChatId = project.telegramChatId;
         await Task.create({
             project,
@@ -134,9 +134,9 @@ app.patch("/updateMembers", async (req, res) => {
         await Project.findByIdAndUpdate({_id: projectId}, {projectMembers: projectMembers});
         await User.findByIdAndUpdate({_id:userId}, {allProjects: projects});
 
-        res.json({status: "OK"})
+        res.json({ status: "OK" })
     } catch (error) {
-        res.json({status:"error", error: error.message})
+        res.json({ status: "error", error: error.message })
     }
 })
 
@@ -181,39 +181,39 @@ app.patch('/updateMeetings', async (req, res) => {
 
 
 // GET SCHEDULE
-app.get('/getSchedule/', async(req,res) =>{
+app.get('/getSchedule/', async (req, res) => {
     console.log('test');
-    try{
+    try {
         const userId = req.query.id;
         console.log(userId);
         // console.log(typeof(userId));
-        const userSchedule = await User.findById({_id:userId}, 'schedule');
-        res.json({status:'OK', schedule:userSchedule});
+        const userSchedule = await User.findById({ _id: userId }, 'schedule');
+        res.json({ status: 'OK', schedule: userSchedule });
     }
-    catch(error){   
-        res.json({status:'error', error:error.message})
+    catch (error) {
+        res.json({ status: 'error', error: error.message })
     }
 })
 
 // GET LIST OF PROJECTS
-app.get('/getProjects/', async(req,res) =>{
+app.get('/getProjects/', async (req, res) => {
     try {
         const userId = req.body.id;
         // const newPassword = await bcrypt.hash(password, 10);
-        const allProjects = await User.findById({_id: userId}, 'allProjects')
-        res.json({status:'OK', allProjects: allProjects});
+        const allProjects = await User.findById({ _id: userId }, 'allProjects')
+        res.json({ status: 'OK', allProjects: allProjects });
     } catch (error) {
         res.json({ status: 'error', error: error.message })
     }
 })
 
 // GET LIST OF PROJECTS
-app.get('/getTasks/', async(req,res) =>{
+app.get('/getTasks/', async (req, res) => {
     try {
         const projectId = req.body.id;
         // const newPassword = await bcrypt.hash(password, 10);
-        const allProjects = await User.findById({_id: userId}, 'allProjects')
-        res.json({status:'OK', allProjects: allProjects});
+        const allProjects = await User.findById({ _id: userId }, 'allProjects')
+        res.json({ status: 'OK', allProjects: allProjects });
     } catch (error) {
         res.json({ status: 'error', error: error.message })
     }
