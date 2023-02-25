@@ -27,8 +27,8 @@ const Login = () => {
     <div class="container">
       <div class="form-container log-in-container">
         <div>
-          <Button sx={{ bgcolor: login ? "#E98074" : "#D8C3A5" }} onClick={lgin}>Login</Button>
-          <Button sx={{ bgcolor: login ? "#D8C3A5" : "#E98074" }} onClick={sgnup}>Signup!</Button>
+          <Button sx={{ bgcolor: login ? "#fae4b1" : "#fffaef" }} onClick={lgin}>Login</Button>
+          <Button sx={{ bgcolor: login ? "#fffaef" : "#fae4b1" }} onClick={sgnup}>Signup!</Button>
         </div>
         {login ? <form className="login" onSubmit={handleSubmit}>
           <h3>Log In</h3>
