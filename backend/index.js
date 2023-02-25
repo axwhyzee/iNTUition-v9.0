@@ -151,16 +151,21 @@ app.patch("/updateMembers", async (req, res) => {
 // UPDATE REQUESTS PATCH REQUEST
 app.patch('/updateSchedule', async (req, res) => {
     try {
+        console.log('test');
         const {userId, schedule} = req.body;
         // const newPassword = await bcrypt.hash(password, 10);
-
-        await User.updateOne({_id: userId}, {schedule: schedule})
+        console.log(schedule);
+        await User.findByIdAndUpdate({_id: userId}, {schedule: schedule});
         res.json({ status: 'OK' })
         res.modifiedCount;
         res.upsertedCount;
     } catch (error) {
         res.json({ status: 'error', error: error.message })
     }
+})
+
+app.get('/updateSchedule', async (req, res) => {
+    console.log('test')
 })
 
 // GET SCHEDULE
@@ -220,7 +225,7 @@ const startServer = async () => {
 
 
 // // Create a bot that uses 'polling' to fetch new updates
-// const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token, { polling: true });
 
 
 // // replace the value below with the Telegram token you receive from @BotFather
@@ -236,23 +241,41 @@ const startServer = async () => {
 // // Listen for any kind of message. There are different kinds of
 // // messages.
 
-// bot.on('message', (msg) => {
-//     const chatId = msg.chat.id;
+bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
 
-//     // send a message to the chat acknowledging receipt of their message
-//     bot.sendMessage(chatId, 'Jiraji-Bot connected.');
-// });
+    // send a message to the chat acknowledging receipt of their message
+    // bot.sendMessage(chatId, 'Jiraji-Bot connected.');
+});
 
 
-// bot.onText(/\/connect/, (msg, match) => {
-//     const chatId = msg.chat.id;
-//     // 'msg' is the received Message from Telegram
-//     // 'match' is the result of executing the regexp above on the text content
-//     // of the message
+bot.onText(/\/connect/, (msg, match) => {
+    const chatId = msg.chat.id;
+    // 'msg' is the received Message from Telegram
+    // 'match' is the result of executing the regexp above on the text content
+    // of the message
+    console.log(chatId);
+    bot.sendMessage(chatId, 'Jiraji-Bot connected.');
+});
 
-//     console.log(chatId)
+bot.onText(/when is the task due/, (msg, match) => {
+    const chatId = msg.chat.id;
+    // 'msg' is the received Message from Telegram
+    // 'match' is the result of executing the regexp above on the text content
+    // of the message
+    bot.sendMessage(chatId, `Your task: BC2407 Analytics Proposal is due tomorrow. Please remember to finish it!`);
+});
 
-// });
+bot.onText(/what are my tasks/, (msg, match) => {
+    const chatId = msg.chat.id;
+    // 'msg' is the received Message from Telegram
+    // 'match' is the result of executing the regexp above on the text content
+    // of the message
+    text = ''
+    text += 
+    bot.sendMessage(chatId, `Your task: BC2407 Analytics Proposal is due tomorrow. Please remember to finish it!`);
+});
+
 
 // const sendReminder = (chatId, message) => {
 
