@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Checkbox, FormControlLabel, FormGroup, List, ListItemButton, ListItemText, Collapse, ListSubheader, Paper, Typography, Box} from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, Paper, Typography, Box} from '@mui/material';
 
 
 
 function Mainpage() {
     const [tasks, setTasks] = useState(["task 1", "task 2", "task 3"]);
     const [completed, setCompleted] = useState([]);
-    const [open, setOpen] = useState(false);
 
     //retrieve from backend
 
@@ -18,24 +17,19 @@ function Mainpage() {
         setCompleted(tempC)
     }
 
-    const handleClick = () => {
-        setOpen(!open);
-    }
-
     return (
-        <div>
-            <Box sx={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-                <Paper elevation="2">
+            <Box sx={{display:"flex", flexDirection:"row", justifyContent:"center", gap:3}}>
+                <Paper elevation="2" sx={{bgcolor:"#D8C3A5"}}>
                     <Typography variant="h3">To-do</Typography>
                     <FormGroup row={false}>
                         {tasks.map(x => {
                             return (
-                                <FormControlLabel value={x} control={<Checkbox value={x} checked={false} name={x} onChange={deletetask}/>} label={x} labelPlacement='right'/>
+                                <FormControlLabel value={x} control={<Checkbox value={x} checked={false} name={x} onChange={deletetask}/>} label={x}/>
                             )
                         })}
                     </FormGroup>
                 </Paper>
-                <Paper elevation="2">
+                <Paper elevation="2" sx={{bgcolor:"#D8C3A5"}}>
                     <Typography variant="h3">Completed</Typography>
                         {completed.map(x => {
                             return(
@@ -44,7 +38,6 @@ function Mainpage() {
                         })}
                 </Paper>
             </Box>
-        </div>
     )
 }
 // {/* <List sx={{bgcolor: 'background.paper' }}
