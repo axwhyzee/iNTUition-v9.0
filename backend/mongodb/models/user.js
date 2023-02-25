@@ -10,3 +10,4 @@ const UserSchema = new mongoose.Schema({
 const userModel = mongoose.model('User', UserSchema);
 
 export default userModel;
+//http://localhost:8080/getSchedule/?id=63fa537f5f0e6abd3e1c06ea
