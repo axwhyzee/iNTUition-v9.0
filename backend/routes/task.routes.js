@@ -7,11 +7,11 @@ import {
     setTaskCompleted,
 } from '../controllers/task.controller.js';
 
-const router = express.Router();
+const taskRouter = express.Router();
 
-router.route('/').get(getAllTasks);
-router.route('/').post(createTask);
-router.route('/:id').patch(setTaskCompleted);
-router.route('/:id').get(getTaskDetail);
+taskRouter.route('/').get(getAllTasks);
+taskRouter.route('/').post(createTask);
+taskRouter.route('/:id').patch(setTaskCompleted);
+taskRouter.route('/:id').get(getTaskDetail);
 
-export default router;
+export default taskRouter;

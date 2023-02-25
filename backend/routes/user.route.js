@@ -6,10 +6,10 @@ import {
     getUserInfoByID
 } from '../controllers/user.controller.js';
 
-const router = express.Router();
+const userRouter = express.Router();
 
-router.route('/').get(getAllUsers);
-router.route('/').post(createUser);
-router.route('/:id').get(getUserInfoByID);
+userRouter.route('/').get(getAllUsers);
+userRouter.route('/').post(createUser);
+userRouter.route('/:id').get(getUserInfoByID);
 
-export default router;
+export default userRouter;
