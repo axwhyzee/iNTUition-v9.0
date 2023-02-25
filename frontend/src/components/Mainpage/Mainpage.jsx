@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Checkbox, FormGroup, Link, Paper, Typography } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, Link, Paper, Typography } from '@mui/material';
 import Addtask from '../Addtask/Addtask';
 import Addmember from '../Addmember/Addmember';
 import './mainpage.css';
 import Addmeeting from "../Addmeeting/Addmeeting";
 import CollatedCalendar from "../CollatedCalendar/CollatedCalendar";
 import ClearIcon from '@mui/icons-material/Clear';
+import PersonIcon from '@mui/icons-material/Person';
 
 const t = {};
 
@@ -150,7 +151,7 @@ function Mainpage() {
                         {members.map(c => {
                             return (
                                 <div>
-                                    <FormControlLabel value={c} control={<Checkbox value={c} checked={false} name={c} onChange={deleteMember} />} label={c} />
+                                    <FormControlLabel value={c} control={<Checkbox icon={<PersonIcon/>} value={c} checked={false} name={c} onChange={deleteMember} />} label={c} />
                                 </div>
                             )
                         })}
