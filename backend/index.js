@@ -158,7 +158,19 @@ app.get('/getSchedule/', async(req,res) =>{
 // GET LIST OF PROJECTS
 app.get('/getProjects/', async(req,res) =>{
     try {
-        const {userId} = req.query.id;
+        const userId = req.body.id;
+        // const newPassword = await bcrypt.hash(password, 10);
+        const allProjects = await User.findById({_id: userId}, 'allProjects')
+        res.json({status:'OK', allProjects: allProjects});
+    } catch (error) {
+        res.json({ status: 'error', error: error.message })
+    }
+})
+
+// GET LIST OF PROJECTS
+app.get('/getTasks/', async(req,res) =>{
+    try {
+        const projectId = req.body.id;
         // const newPassword = await bcrypt.hash(password, 10);
         const allProjects = await User.findById({_id: userId}, 'allProjects')
         res.json({status:'OK', allProjects: allProjects});
@@ -169,7 +181,7 @@ app.get('/getProjects/', async(req,res) =>{
 
 const startServer = async () => {
     try {
-        connectDB(process.env.MONGODB_URL);
+        connectDB('mongodb+srv://wchong036:ninabedog1@cluster0.9nhomnm.mongodb.net/?retryWrites=true&w=majority');
         app.listen(8080, () => {
             console.log('Server started on port http://localhost:8080');
         })
@@ -184,7 +196,7 @@ const startServer = async () => {
 // -----------------------------------------------------------
 
 // // Create a bot that uses 'polling' to fetch new updates
-const bot = new TelegramBot(token, { polling: true });
+// const bot = new TelegramBot(token, { polling: true });
 
 
 // replace the value below with the Telegram token you receive from @BotFather
@@ -200,23 +212,23 @@ if (process.env.NODE_ENV === 'production') {
 // Listen for any kind of message. There are different kinds of
 // messages.
 
-bot.on('message', (msg) => {
-    const chatId = msg.chat.id;
+// bot.on('message', (msg) => {
+//     const chatId = msg.chat.id;
 
-    // send a message to the chat acknowledging receipt of their message
-    bot.sendMessage(chatId, 'Jiraji-Bot connected.');
-});
+//     // send a message to the chat acknowledging receipt of their message
+//     bot.sendMessage(chatId, 'Jiraji-Bot connected.');
+// });
 
 
-bot.onText(/\/connect/, (msg, match) => {
-    const chatId = msg.chat.id;
-    // 'msg' is the received Message from Telegram
-    // 'match' is the result of executing the regexp above on the text content
-    // of the message
+// bot.onText(/\/connect/, (msg, match) => {
+//     const chatId = msg.chat.id;
+//     // 'msg' is the received Message from Telegram
+//     // 'match' is the result of executing the regexp above on the text content
+//     // of the message
 
-    console.log(chatId)
+//     console.log(chatId)
 
-});
+// });
 
 const sendReminder = (chatId, message) => {
 
