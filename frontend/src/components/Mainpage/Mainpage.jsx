@@ -5,12 +5,11 @@ import Addmember from '../Addmember/Addmember';
 import './mainpage.css';
 import Addmeeting from "../Addmeeting/Addmeeting";
 
-
 function Mainpage() {
     const [tasks, setTasks] = useState(["task 1", "task 2", "task 3"]);
     const [completed, setCompleted] = useState([]);
     const [meetings, setMeetings] = useState([{ "title": "meeting 1", "date": new Date("2023-3-1"), "time": "9:00 PM", "link": "zoom.com", "pwd": "1234" }]);
-
+    
     //retrieve from backend
     const deletetask = (e) => {
         const temp = [...tasks];
