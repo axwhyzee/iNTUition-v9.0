@@ -20,11 +20,11 @@ function Addtask ({addTask}) {
                     <DialogTitle>Add tasks</DialogTitle>
                         <DialogContent>
                             <FormGroup row={false} sx={{"& .MuiTextField-root":{my:0.5}}}>
-                                <TextField variant="outlined" id="Description" name="description" label='Description'/>
-                                <TextField variant="outlined" id="Due date" name="duedate" label="Due Date" InputLabelProps={{
+                                <TextField variant="outlined" id="description" name="description" label='Description'/>
+                                <TextField variant="outlined" id="duedate" name="duedate" label="Due Date" InputLabelProps={{
           shrink: true,
         }} type="date"/>
-                                <TextField variant="outlined" id="Assignedmem" name="assignedmem" label='Assigned member'/>
+                                <TextField variant="outlined" id="assignedmem" name="assignedmem" label='Assigned member'/>
                             </FormGroup>
                     </DialogContent>
                     <DialogActions>

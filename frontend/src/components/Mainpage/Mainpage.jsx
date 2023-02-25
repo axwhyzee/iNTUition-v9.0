@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Checkbox, FormControlLabel, FormGroup, Link, Paper, Typography } from '@mui/material';
+import { Checkbox, FormGroup, Link, Paper, Typography } from '@mui/material';
 import Addtask from '../Addtask/Addtask';
 import Addmember from '../Addmember/Addmember';
 import './mainpage.css';
@@ -7,11 +7,13 @@ import Addmeeting from "../Addmeeting/Addmeeting";
 import CollatedCalendar from "../CollatedCalendar/CollatedCalendar";
 import ClearIcon from '@mui/icons-material/Clear';
 
+const t = {};
 
 function Mainpage() {
     const [tasks, setTasks] = useState([]);
     const [completed, setCompleted] = useState([]);
-    const [meetings, setMeetings] = useState([{ "title": "meeting 1", "date": new Date("2023-3-1"), "time": "9:00 PM", "link": "zoom.com", "pwd": "1234" }]);
+    const [meetings, setMeetings] = useState([]);
+
     
     //retrieve from backend
     const deletetask = (e) => {
@@ -31,6 +33,10 @@ function Mainpage() {
 
     const addTask = (e) => {
         const f = new FormData(e.target);
+        console.log(f.get("duedate"))
+        const obj = {"desc": f.get("description"), "date":f.get("duedate"), "assigned":f.get("assignedmem")};
+        t[f.get("description")] = obj;
+        console.log("T", t);
         const temp = [...tasks, f.get("description")];
         setTasks(temp);
     }
@@ -101,13 +107,17 @@ function Mainpage() {
                     <div className='board-title'>To-do</div>
                     <div className='board-content'>
                             {tasks.map(x => {
+                                console.log(t[`${x}`])
                                 return (
                                     <div>
-                                        <FormControlLabel value={x} control={<Checkbox value={x} checked={false} name={x} onChange={deletetask} />} label={x} />
-                                        {/* <div>
-                                        <Typography fontSize={9}>Due: {x.date}</Typography>
-                                        <Typography fontSize={9}>Assigned: {x.assigned}</Typography>
-                                        </div> */}
+                                        <div style={{display:"flex", flexDirection:"row"}}>
+                                            <Checkbox value={x} checked={false} name={x} onChange={deletetask} />
+                                            <Typography sx={{paddingTop:0.5}} variant="h5">{x}</Typography>
+                                        </div>
+                                        <div>
+                                        <Typography fontSize={11}>Due: {t[`${x}`]["date"]}</Typography>
+                                        <Typography fontSize={11}>Assigned: {t[`${x}`]["assigned"]}</Typography>
+                                        </div>
                                     </div>
                                 )
                             })}
@@ -119,7 +129,7 @@ function Mainpage() {
                         {completed.map(c => {
                             return (
                                 
-                                <Typography sx={{ textDecoration: "line-through" }}>{c}</Typography>
+                                <Typography variant="h5" sx={{ textDecoration: "line-through" }}>{c}</Typography>
                             )
                         })}
                     </div>

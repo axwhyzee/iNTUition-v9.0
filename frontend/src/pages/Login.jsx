@@ -41,7 +41,8 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               value={password} variant="outlined" id="Password" name="password" label='Password' />
 
-            <button variant="contained" className="login-btn" onClick={() => { navigate("/home") }}>Log in</button></form>
+            <button variant="contained" className="login-btn" onClick={() => { 
+              if (password === "password" && username === "kirthi") {navigate("/home")}}}>Log in</button></form>
             : <form className="signup" onSubmit={handleSubmit}>
               <h3>Sign Up</h3>
 
