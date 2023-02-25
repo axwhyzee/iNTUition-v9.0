@@ -4,6 +4,7 @@ import Addtask from '../Addtask/Addtask';
 import Addmember from '../Addmember/Addmember';
 import './mainpage.css';
 import Addmeeting from "../Addmeeting/Addmeeting";
+import CollatedCalendar from "../CollatedCalendar/CollatedCalendar";
 
 
 function Mainpage() {
@@ -87,6 +88,7 @@ function Mainpage() {
                     </div>
                 </Paper>
             </div>
+            <CollatedCalendar />
         </div>
     )
 }
