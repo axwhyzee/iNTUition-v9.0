@@ -11,7 +11,7 @@ function SideBarCom(props) {
     function handleKeyDown(event) {
         if (event.key === 'Enter') {
             const button = (
-                <button className="proj-com" onClick={() => console.log(inputValue)}>
+                <button className="proj-com">
                     {inputValue}
                     <span className="delete-button" onClick={deletehandler}>x</span>
                 </button>

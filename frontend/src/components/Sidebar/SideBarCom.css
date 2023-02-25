@@ -1,10 +1,13 @@
 .input {
   border-radius: 8px;
-  height: 40px;
+  height: 48px;
+  width: 150px;
+  background-color: #D8C3A5;
+  border-style: none;
 }
 
 .proj-com {
-  background-color: #FFFFFF;
+  background-color: #D8C3A5;
   border: 1px solid #222222;
   border-radius: 8px;
   box-sizing: border-box;
@@ -27,6 +30,7 @@
   -webkit-user-select: none;
   width: 150px;
   margin: 1%;
+  border-style: none;
 }
 
 .proj-com:focus-visible {

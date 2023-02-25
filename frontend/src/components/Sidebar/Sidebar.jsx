@@ -7,10 +7,11 @@ function Sidebar() {
     const [components, setComponents] = useState([]);
 
     function handleDelete(i) {
-        let temp = components.slice();
-        console.log(i)
-        temp.splice(i,1)
-        setComponents(temp);
+        setComponents((currComps) => {
+            let temp = currComps.slice();
+            temp.splice(0,1);
+            return temp;
+        })
     }
     function addNewComponent() {
         <input type="text"></input>
