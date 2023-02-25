@@ -1,6 +1,8 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -27,9 +29,9 @@ const Signup = () => {
         value={password} 
       />
 
-      <button>Sign up</button>
+      <button onClick={() => {navigate("/")}}>Sign up</button>
     </form>
   )
 }
 
-export default Signup
+export default Signup;
