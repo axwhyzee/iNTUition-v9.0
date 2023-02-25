@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@mui/x-date-pickers": "^5.0.20",
+    "bootstrap": "^5.2.3",
+    "node": "^19.6.1",
+    "node-sass": "^8.0.0",
+    "react": "^18.2.0",
+    "react-pro-sidebar": "^1.0.0",
+    "sass": "^1.58.3",
+    "sass-loader": "^13.2.0"
+  }
+}
