@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormGroup, TextField } from '@mui/material';
 import { useState } from 'react';
 
-function Addmeeting() {
+function Addmeeting({addMeeting}) {
     const [modal, setModal] = useState(false)
     const openModal = () => {
         setModal(true);
@@ -12,16 +12,11 @@ function Addmeeting() {
     }
 
 
-    const addMeeting = () => {
-        //send meetings
-    }
-
-
     return (
         <div>
             <Button sx={{ m: 1, bgcolor: "#E85A7F", ":hover":{bgcolor: "#e87c5a"}}} variant="contained" onClick={openModal}>Add meeting</Button>
             <Dialog open={modal} onClose={closeModal}>
-                <form onSubmit={addMeeting} autoComplete="off" style={{ backgroundColor: "#EAE7DC" }}>
+                <form onSubmit={(e) => {e.preventDefault(); addMeeting(e);}} autoComplete="off" style={{ backgroundColor: "#EAE7DC" }}>
                     <DialogTitle>Add meeeting</DialogTitle>
                     <DialogContent>
                         <FormGroup row={false} sx={{ "& .MuiTextField-root": { my: 0.5 } }}>

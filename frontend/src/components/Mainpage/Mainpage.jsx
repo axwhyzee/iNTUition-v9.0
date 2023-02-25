@@ -7,17 +7,18 @@ import Addmeeting from "../Addmeeting/Addmeeting";
 import CollatedCalendar from "../CollatedCalendar/CollatedCalendar";
 
 function Mainpage() {
-    const [tasks, setTasks] = useState(["task 1", "task 2", "task 3"]);
+    const [tasks, setTasks] = useState([]);
     const [completed, setCompleted] = useState([]);
     const [meetings, setMeetings] = useState([{ "title": "meeting 1", "date": new Date("2023-3-1"), "time": "9:00 PM", "link": "zoom.com", "pwd": "1234" }]);
     
     //retrieve from backend
     const deletetask = (e) => {
         const temp = [...tasks];
+        const tempC = [...completed, e.target.name];
+        console.log(temp.indexOf(e.target.value), "index");
         temp.splice(temp.indexOf(e.target.value), 1);
         setTasks(temp);
-        const tempC = [...completed, e.target.value]
-        setCompleted(tempC)
+        setCompleted(tempC);
     }
 
     const deletemeeting = (e) => {
@@ -26,15 +27,27 @@ function Mainpage() {
         setMeetings(temp);
     }
 
+    const addTask = (e) => {
+        const f = new FormData(e.target);
+        const temp = [...tasks, f.get("description")];
+        setTasks(temp);
+    }
+
+    const addMeeting = (e) => {
+        const f = new FormData(e.target);
+        const obj = {"title": f.get("title"), "date":new Date(f.get("date")), "time":f.get("time"), "link":f.get("link"), "pwd":f.get("pwd")};
+        const temp = [...meetings, obj];
+        setMeetings(temp);
+    }
 
     return (
         <div className='main-wrapper'>
             <h1 className='project-title'>Project Jiraji</h1>
             <p className='project-desc'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum turpis quis iaculis condimentum. Vestibulum euismod, ex vitae convallis porta, odio magna venenatis mauris, eget pellentesque velit ante eu erat. Praesent ac tincidunt nunc. Donec enim lectus, malesuada porta imperdiet ultrices, mollis in ipsum. Duis euismod, sapien quis tincidunt consectetur, metus lectus placerat massa, a malesuada nisi massa vel quam. Integer euismod ut lectus eu bibendum. Duis nec lobortis magna. Phasellus augue metus, maximus vitae malesuada sit amet, sagittis sit amet lectus. Duis venenatis bibendum risus. Phasellus fringilla erat id ipsum scelerisque hendrerit. Vestibulum ac mi vel nisi viverra finibus quis sed magna.</p>
             <div className='btn-wrapper'>
-                <Addtask />
+                <Addtask addTask={addTask}/>
                 <Addmember />
-                <Addmeeting />
+                <Addmeeting addMeeting={addMeeting}/>
             </div>
             <div className='kanban-hr'></div>
             <Paper className="single-board-meeting" elevation={2}>
@@ -72,21 +85,26 @@ function Mainpage() {
                 <Paper className='single-board' elevation={2}>
                     <div className='board-title'>To-do</div>
                     <div className='board-content'>
-                        <FormGroup row={false}>
                             {tasks.map(x => {
                                 return (
-                                    <FormControlLabel value={x} control={<Checkbox value={x} checked={false} name={x} onChange={deletetask} />} label={x} />
+                                    <div>
+                                        <FormControlLabel value={x} control={<Checkbox value={x} checked={false} name={x} onChange={deletetask} />} label={x} />
+                                        {/* <div>
+                                        <Typography fontSize={9}>Due: {x.date}</Typography>
+                                        <Typography fontSize={9}>Assigned: {x.assigned}</Typography>
+                                        </div> */}
+                                    </div>
                                 )
                             })}
-                        </FormGroup>
                     </div>
                 </Paper>
                 <Paper className='single-board' elevation={2}>
                     <div className='board-title'>Completed</div>
                     <div className='board-content'>
-                        {completed.map(x => {
+                        {completed.map(c => {
                             return (
-                                <Typography sx={{ textDecoration: "line-through" }}>{x}</Typography>
+                                
+                                <Typography sx={{ textDecoration: "line-through" }}>{c}</Typography>
                             )
                         })}
                     </div>
