@@ -289,8 +289,6 @@ app.delete('/deleteTask/', async(req,res) =>{
     }
 })
 
-
-
 const startServer = async () => {
     try {
         connectDB('mongodb+srv://wchong036:ninabedog1@cluster0.9nhomnm.mongodb.net/?retryWrites=true&w=majority');
