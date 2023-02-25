@@ -5,6 +5,8 @@ import Addmember from '../Addmember/Addmember';
 import './mainpage.css';
 import Addmeeting from "../Addmeeting/Addmeeting";
 import CollatedCalendar from "../CollatedCalendar/CollatedCalendar";
+import ClearIcon from '@mui/icons-material/Clear';
+
 
 function Mainpage() {
     const [tasks, setTasks] = useState([]);
@@ -38,6 +40,19 @@ function Mainpage() {
         const obj = {"title": f.get("title"), "date":new Date(f.get("date")), "time":f.get("time"), "link":f.get("link"), "pwd":f.get("pwd")};
         const temp = [...meetings, obj];
         setMeetings(temp);
+
+        console.log(fetch("https://intuition.onrender.com/meetingTime/", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: {
+                'title': obj.title,
+                'date': obj.date,
+                "time": obj.time
+            },
+        }));
     }
 
     return (
@@ -61,7 +76,7 @@ function Mainpage() {
                                 return (
                                     <div>
                                         <div style={{ display: "flex", flexDirection: "row" }}>
-                                            <Checkbox value={x} checked={false} name={x} onChange={deletemeeting} />
+                                            <Checkbox icon={<ClearIcon/>} value={x} checked={false} name={x} onChange={deletemeeting} />
                                             <Typography variant="h4" >{x.title}</Typography>
                                         </div>
                                         <Typography variant="h5" >{x.time}</Typography>
