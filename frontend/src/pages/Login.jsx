@@ -39,7 +39,7 @@ const Login = () => {
 
             <TextField
               onChange={(e) => setPassword(e.target.value)}
-              value={password} variant="outlined" id="Password" name="password" label='Password' />
+              value={password} variant="outlined" id="Password" name="password" label='Password' type="password"/>
 
             <button variant="contained" className="login-btn" onClick={() => { 
               if (password === "password" && username === "kirthi") {navigate("/home")}}}>Log in</button></form>
@@ -52,7 +52,7 @@ const Login = () => {
 
               <TextField
                 onChange={(e) => setPassword(e.target.value)}
-                value={password} variant="outlined" id="Password" name="password" label='Password' />
+                value={password} variant="outlined" id="Password" name="password" label='Password' type="password"/>
 
               <button variant="contained" className="login-btn" onClick={() => { navigate("/home") }}>Sign up</button>
             </form>}
