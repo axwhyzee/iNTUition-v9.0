@@ -1,5 +1,6 @@
-import { Box } from '@mui/system';
-import './App.css';
+import Navbar from './components/Navbar/Navbar';
+import Calendar from './components/Calendar/Calendar';
+import Sidebar from './components/Sidebar/Sidebar';
 import Addtask from './components/Addtask/Addtask';
 import Mainpage from './components/Mainpage/Mainpage';
 
@@ -8,8 +9,12 @@ function App() {
 
   return (
       <div className="App">
-          <Mainpage></Mainpage>
-          <Addtask></Addtask>
+          <Navbar />
+          <Sidebar />
+          <Calendar />
+          <Mainpage/>
+          <Addtask/>
+          
       </div>
   );
 }
