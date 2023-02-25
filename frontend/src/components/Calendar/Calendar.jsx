@@ -5,7 +5,7 @@ function Calendar() {
     const [calendar, setCalendar] = useState();
     const [startTime, setStartTime] = useState(8 * 4); // 08:00
     const [endTime, setEndTime] = useState(23 * 4 + 2); // 23:30
-    const [toggleStart, setToggleStart] = useState([]);
+    const [toggleStart, setToggleStart] = useState([0, 0, 0, false]);
     const today = (new Date()).getTime();
     const days = 7;
     const timings = [
@@ -37,12 +37,11 @@ function Calendar() {
 
 
     function startToggle(row, col) {
-        console.log('start', row, col);
-        setToggleStart([row, col, calendar[row][col]]);
+        setToggleStart([row, col, calendar[row][col], true]);
     }
 
-    function endToggle(row, col) {
-        if (toggleStart.length) {
+    function endToggle(row, col, newFlagState) {
+        if (toggleStart[3]) {
             const colSt = Math.min(toggleStart[1], col);
             const colEnd = Math.max(toggleStart[1], col);
             const target = (toggleStart[2] + 1) % 2;
@@ -54,9 +53,8 @@ function Calendar() {
                 }
             }
             setCalendar(calendarClone);
-        }
-        else {
-            console.log('Invalid', toggleStart);
+
+            if (!newFlagState) setToggleStart([0, 0, 0, false]);
         }
     }
 
@@ -97,13 +95,13 @@ function Calendar() {
                                             <td rowSpan='4' className='calendar-cell calendar-cell-timing'>{timings[idx]}</td>
                                         ) : (<></>)
                                     }
-                                    <td className={'calendar-cell' + (value[0] == 0 ? ' calendar-cell-green' : '')} onMouseUp={() => { endToggle(idx, 0) }} onMouseDown={() => { startToggle(idx, 0) }}></td>
-                                    <td className={'calendar-cell' + (value[1] == 0 ? ' calendar-cell-green' : '')} onMouseUp={() => { endToggle(idx, 1) }} onMouseDown={() => { startToggle(idx, 1) }}></td>
-                                    <td className={'calendar-cell' + (value[2] == 0 ? ' calendar-cell-green' : '')} onMouseUp={() => { endToggle(idx, 2) }} onMouseDown={() => { startToggle(idx, 2) }}></td>
-                                    <td className={'calendar-cell' + (value[3] == 0 ? ' calendar-cell-green' : '')} onMouseUp={() => { endToggle(idx, 3) }} onMouseDown={() => { startToggle(idx, 3) }}></td>
-                                    <td className={'calendar-cell' + (value[4] == 0 ? ' calendar-cell-green' : '')} onMouseUp={() => { endToggle(idx, 4) }} onMouseDown={() => { startToggle(idx, 4) }}></td>
-                                    <td className={'calendar-cell' + (value[5] == 0 ? ' calendar-cell-green' : '')} onMouseUp={() => { endToggle(idx, 5) }} onMouseDown={() => { startToggle(idx, 5) }}></td>
-                                    <td className={'calendar-cell' + (value[6] == 0 ? ' calendar-cell-green' : '')} onMouseUp={() => { endToggle(idx, 6) }} onMouseDown={() => { startToggle(idx, 6) }}></td>
+                                    <td className={'calendar-cell calendar-cell-hover' + (value[0] == 0 ? ' calendar-cell-green' : '') + (idx % 4 == 0 ? ' calendar-cell-hour' : '')} onMouseUp={() => { endToggle(idx, 0, false) }} onMouseOver={() => { endToggle(idx, 0, true) }} onMouseDown={() => { startToggle(idx, 0) }}></td>
+                                    <td className={'calendar-cell calendar-cell-hover' + (value[1] == 0 ? ' calendar-cell-green' : '') + (idx % 4 == 0 ? ' calendar-cell-hour' : '')} onMouseUp={() => { endToggle(idx, 1, false) }} onMouseOver={() => { endToggle(idx, 1, true) }} onMouseDown={() => { startToggle(idx, 1) }}></td>
+                                    <td className={'calendar-cell calendar-cell-hover' + (value[2] == 0 ? ' calendar-cell-green' : '') + (idx % 4 == 0 ? ' calendar-cell-hour' : '')} onMouseUp={() => { endToggle(idx, 2, false) }} onMouseOver={() => { endToggle(idx, 2, true) }} onMouseDown={() => { startToggle(idx, 2) }}></td>
+                                    <td className={'calendar-cell calendar-cell-hover' + (value[3] == 0 ? ' calendar-cell-green' : '') + (idx % 4 == 0 ? ' calendar-cell-hour' : '')} onMouseUp={() => { endToggle(idx, 3, false) }} onMouseOver={() => { endToggle(idx, 3, true) }} onMouseDown={() => { startToggle(idx, 3) }}></td>
+                                    <td className={'calendar-cell calendar-cell-hover' + (value[4] == 0 ? ' calendar-cell-green' : '') + (idx % 4 == 0 ? ' calendar-cell-hour' : '')} onMouseUp={() => { endToggle(idx, 4, false) }} onMouseOver={() => { endToggle(idx, 4, true) }} onMouseDown={() => { startToggle(idx, 4) }}></td>
+                                    <td className={'calendar-cell calendar-cell-hover' + (value[5] == 0 ? ' calendar-cell-green' : '') + (idx % 4 == 0 ? ' calendar-cell-hour' : '')} onMouseUp={() => { endToggle(idx, 5, false) }} onMouseOver={() => { endToggle(idx, 5, true) }} onMouseDown={() => { startToggle(idx, 5) }}></td>
+                                    <td className={'calendar-cell calendar-cell-hover' + (value[6] == 0 ? ' calendar-cell-green' : '') + (idx % 4 == 0 ? ' calendar-cell-hour' : '')} onMouseUp={() => { endToggle(idx, 6, false) }} onMouseOver={() => { endToggle(idx, 6, true) }} onMouseDown={() => { startToggle(idx, 6) }}></td>
                                 </tr>
                                 : <></>
                         }) : <></>
