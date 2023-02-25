@@ -1,7 +1,7 @@
 .login-btn {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #f2c555;
+	background-color: #f2c555;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -10,6 +10,11 @@
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
     margin-top: 10%;
+}
+
+.login-btn:hover{
+    box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+    transition: box-shadow .2s;
 }
 
 .container {
