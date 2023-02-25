@@ -10,6 +10,11 @@
     background: transparent !important;
     margin: 0 10px;
 }
+.single-board-meeting {
+    background: transparent !important;
+    margin: 0 10px;
+    flex:1;
+}
 
 .board-title {
     background-color: #D8C3A5;
