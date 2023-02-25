@@ -3,7 +3,7 @@ import Calendar from './components/Calendar/Calendar';
 import Sidebar from './components/Sidebar/Sidebar';
 import './App.css';
 import Mainpage from './components/Mainpage/Mainpage';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Login from './pages/Login';
 
