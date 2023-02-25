@@ -125,6 +125,29 @@ app.post('/createMeetings', async (req, res) => {
     }
 })
 
+//ADD MEMBERS TO PROJECT PATCH REQUEST
+//NEED TESTING
+app.patch("/updateMembers", async (req, res) => {
+    try {
+        const {memberId ,members, projectId, projects} = req.body;
+
+        await Project.updateOne({_id: projectId}, {projectMembers: members});
+        await User.updateOne({_id:memberId}, {allProjects: projects});
+
+        res.json({status: "OK"})
+    } catch (error) {
+        res.json({status:"error", error: error.message})
+    }
+})
+
+//ADD MEETINGS TO PROJECT PATCH REQUEST
+//NEED TESTING
+app.patch("/updateMeetings", async (req, res) => {
+    try {
+        const {}
+    }
+})
+
 // UPDATE REQUESTS PATCH REQUEST
 app.patch('/updateSchedule', async (req, res) => {
     try {

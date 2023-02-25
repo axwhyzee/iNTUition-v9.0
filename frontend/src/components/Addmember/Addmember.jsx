@@ -12,6 +12,7 @@ function Addmember() {
     }
 
 
+    //send array of all the members
     const addMember = () => {
         //send member
     }
@@ -25,7 +26,7 @@ function Addmember() {
                     <DialogTitle>Add member</DialogTitle>
                     <DialogContent>
                         <FormGroup row={false} sx={{ "& .MuiTextField-root": { my: 0.5 } }}>
-                            <TextField variant="outlined" id="Projectmem" name="projectmem" label='Member ID' />
+                            <TextField variant="outlined" id="Projectmem" name="projectmem" label='Member name' />
                         </FormGroup>
                     </DialogContent>
                     <DialogActions>
