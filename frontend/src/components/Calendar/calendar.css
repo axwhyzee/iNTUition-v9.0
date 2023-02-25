@@ -1,0 +1,39 @@
+.calendar-wrapper {
+    max-width: 780px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.calendar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.calendar-header {
+    padding: 10px 0;
+}
+
+.calendar-cell {
+    width: 50px;
+    height: 10px;
+    border: 0;
+}
+
+.calendar-cell-timing {
+    font-size: 8px;
+    vertical-align: top;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.calendar-cell-hour {
+    border-top: 1px solid #000 !important;
+}
+
+.calendar-cell-green {
+    background-color: rgba(134, 205, 134, 0.43);
+}
+
+.calendar-cell-red {
+    background-color: rgba(236, 126, 107, 0.463);
+}
