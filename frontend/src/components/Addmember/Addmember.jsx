@@ -19,7 +19,7 @@ function Addmember() {
 
     return (
         <div>
-            <Button sx={{ m: 1, bgcolor: "#E85A4F" }} variant="contained" onClick={openModal}>Add member</Button>
+            <Button sx={{ m: 1, bgcolor: "#E85A4F", ":hover":{bgcolor:"#e8a74f"} }} variant="contained" onClick={openModal}>Add member</Button>
             <Dialog open={modal} onClose={closeModal}>
                 <form onSubmit={addMember} autoComplete="off" style={{ backgroundColor: "#EAE7DC" }}>
                     <DialogTitle>Add member</DialogTitle>

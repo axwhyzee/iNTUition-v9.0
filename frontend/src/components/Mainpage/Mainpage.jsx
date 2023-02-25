@@ -3,11 +3,13 @@ import { Checkbox, FormControlLabel, FormGroup, Paper, Typography } from '@mui/m
 import Addtask from '../Addtask/Addtask';
 import Addmember from '../Addmember/Addmember';
 import './mainpage.css';
+import Addmeeting from "../Addmeeting/Addmeeting";
 
 
 function Mainpage() {
     const [tasks, setTasks] = useState(["task 1", "task 2", "task 3"]);
     const [completed, setCompleted] = useState([]);
+    const [meetings, setMeetings] = useState([{"title": "meeting 1", "date": Date(1/3/2023), "time": "9:00 PM", "link":"zoom.com", "pwd":"1234"}]);
 
     //retrieve from backend
     const deletetask = (e) => {
@@ -18,6 +20,13 @@ function Mainpage() {
         setCompleted(tempC)
     }
 
+    const deletemeeting = (e) => {
+        const temp = [...meetings];
+        temp.splice(temp.indexOf(e.target.value),1);
+        setMeetings(temp);
+    }
+
+
     return (
         <div className='main-wrapper'>
             <h1 className='project-title'>Project Jiraji</h1>
@@ -25,6 +34,7 @@ function Mainpage() {
             <div className='btn-wrapper'>
                 <Addtask />
                 <Addmember />
+                <Addmeeting />
             </div>
             <div className='kanban-board'>
                 <Paper className='single-board' elevation={2}>
@@ -47,6 +57,27 @@ function Mainpage() {
                                 <Typography sx={{ textDecoration: "line-through" }}>{x}</Typography>
                             )
                         })}
+                    </div>
+                </Paper>
+                <Paper className="single-board" elevation={2}>
+                    <div className="board-title">Upcoming meetings</div>
+                    <div className="board-content">
+                    <FormGroup row={false}>
+                        {meetings.map(x => {
+                            if (x.date >= Date.now()) {
+                                return(
+                                    <div>
+                                        <Checkbox value={x} checked={false} name={x} onChange={deletemeeting}/>
+                                        <Typography variant="h4" >{x.title}</Typography><br/>
+                                        <Typography variant="h5" >{x.time}</Typography><br/>
+                                        <Typography variant="h6" >{x.link}</Typography>&nbsp&nbsp&nbsp&nbsp
+                                        <Typography variant="h6">{x.pwd}</Typography>
+                                    </div>
+                                )
+                            }
+                            return;
+                        })}
+                    </FormGroup>
                     </div>
                 </Paper>
             </div>

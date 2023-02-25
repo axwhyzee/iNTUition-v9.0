@@ -8,7 +8,7 @@ function Navbar() {
 
   return (
     <nav className='navbar'>
-    <button className='nav-btn' onClick={() => {navigate("/")}}>HOME</button>
+    <button className='nav-btn' onClick={() => {navigate("/home")}}>HOME</button>
     <button className='nav-btn' onClick={() => {navigate("/calendar")}}>CALENDAR</button>
     </nav>
     
