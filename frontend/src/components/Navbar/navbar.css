@@ -32,7 +32,10 @@
     transition: .5s;
 }
 
+.nav-btn:hover {
+    cursor: pointer;
+}
+
 .nav-btn:hover::after {
     transform: scaleX(1);
-    cursor: pointer;
 }
