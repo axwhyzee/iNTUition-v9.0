@@ -1,5 +1,12 @@
 .sidebar {
-    width: 10%;
+  position: absolute;
+  left: 0;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  padding: 10px;
 }
 
 .add-button {
@@ -31,9 +38,10 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: auto;
+  width: 50px;
   will-change: transform,opacity;
   z-index: 0;
+  margin: 10px
 }
 
 .add-button:hover {
