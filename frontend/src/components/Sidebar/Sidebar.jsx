@@ -1,32 +1,44 @@
 import React from 'react';
 import './sidebar.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SideBarCom from './SideBarCom';
 
-function Sidebar() {
-    const [components, setComponents] = useState([]);
+function Sidebar({ projects, handleDelete, handleAdd, handleSet }) {
+    const [components, setComponents] = useState({});
+    const [editFlag, setEditFlag] = useState(false);
+    const [inputString, setInputString] = useState('');
 
-    function handleDelete(i) {
-        setComponents((currComps) => {
-            let temp = currComps.slice();
-            temp.splice(0,1);
-            return temp;
-        })
-    }
+    useEffect(() => {
+        setComponents(projects);
+    }, [projects]);
+
     function addNewComponent() {
-        <input type="text"></input>
-        const newComponent = (
-            <SideBarCom onDelete={handleDelete}></SideBarCom>
-        );
+        setEditFlag(true);
+    }
 
-        setComponents([...components, newComponent]);
+    function handleKeyDown(key) {
+        if (key == 'Enter' && editFlag) {
+            setEditFlag(false);
+            handleAdd(inputString);
+        }
+    }
+
+    function handleClick(project_id) {
+        console.log(project_id);
+        handleSet(project_id);
     }
 
     return <div className='sidebar'>
         <button onClick={addNewComponent} className="add-button">+</button>
-        {components.map((component, index) => (
-            <div key={index}>{component}</div>
-        ))}
+        {
+            editFlag ? <input className='abc' type='text'
+                onChange={(e) => setInputString(e.target.value)}
+                onKeyDown={(e) => handleKeyDown(e.key)}
+            /> : <></>
+        }
+        {Object.keys(components).length ? Object.entries(components).map((component, index) => (
+            <SideBarCom key={index} component={component[0]} handleClick={handleClick} onDelete={() => handleDelete(component[0])} />
+        )) : <></>}
     </div>
 }
 
