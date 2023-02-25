@@ -125,6 +125,29 @@ app.post('/createMeetings', async (req, res) => {
     }
 })
 
+//ADD MEMBERS TO PROJECT PATCH REQUEST
+//NEED TESTING
+app.patch("/updateMembers", async (req, res) => {
+    try {
+        const {memberId ,members, projectId, projects} = req.body;
+
+        await Project.updateOne({_id: projectId}, {projectMembers: members});
+        await User.updateOne({_id:memberId}, {allProjects: projects});
+
+        res.json({status: "OK"})
+    } catch (error) {
+        res.json({status:"error", error: error.message})
+    }
+})
+
+//ADD MEETINGS TO PROJECT PATCH REQUEST
+//NEED TESTING
+// app.patch("/updateMeetings", async (req, res) => {
+//     try {
+//         const {}
+//     }
+// })
+
 // UPDATE REQUESTS PATCH REQUEST
 app.patch('/updateSchedule', async (req, res) => {
     try {
@@ -192,25 +215,26 @@ const startServer = async () => {
 }
 
 // -----------------------------------------------------------
-//                TELEGRAM BOT 
-// -----------------------------------------------------------
+// //                TELEGRAM BOT 
+// // -----------------------------------------------------------
+
 
 // // Create a bot that uses 'polling' to fetch new updates
 // const bot = new TelegramBot(token, { polling: true });
 
 
-// replace the value below with the Telegram token you receive from @BotFather
-if (process.env.NODE_ENV === 'production') {
-    const bot = new TelegramBot(token);
-    bot.setWebHook(process.env.HEROKU_URL + bot.token);
-} else {
-    // const bot = new TelegramBot(token, {polling: true});
-}
+// // replace the value below with the Telegram token you receive from @BotFather
+// if (process.env.NODE_ENV === 'production') {
+//     const bot = new TelegramBot(token);
+//     bot.setWebHook(process.env.HEROKU_URL + bot.token);
+// } else {
+//     // const bot = new TelegramBot(token, {polling: true});
+// }
 
 
 
-// Listen for any kind of message. There are different kinds of
-// messages.
+// // Listen for any kind of message. There are different kinds of
+// // messages.
 
 // bot.on('message', (msg) => {
 //     const chatId = msg.chat.id;
@@ -230,8 +254,8 @@ if (process.env.NODE_ENV === 'production') {
 
 // });
 
-const sendReminder = (chatId, message) => {
+// const sendReminder = (chatId, message) => {
 
-}
+// }
 
 startServer();

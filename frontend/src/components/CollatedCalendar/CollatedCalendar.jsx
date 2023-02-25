@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './collatedCalendar.css';
 
 
-function CollatedCalendar(userIds) {
-    const [calendar, setCalendar] = useEffect();
-    const API_URL = 'https://localhost/8080/';
+function CollatedCalendar() {
+    const [calendar, setCalendar] = useState();
+    const userIds = ['63fa537f5f0e6abd3e1c06ea'];
+    const startTime = 32;
+    const endTime = 84;
+    const today = (new Date()).getTime();
+    const API_URL = 'https://syed0059-stunning-space-train-rxw5q956qrghwwjv.github.dev/';
     const timings = [
         '00:00', '00:15', '00:30', '00:45',
         '01:00', '01:15', '01:30', '01:45',
@@ -36,18 +40,19 @@ function CollatedCalendar(userIds) {
         if (!userIds.length) return;
 
         const updateCalender = async () => {
-            let newCalendar;
+            let newCalendar = null;
             let i, j;
             for (const userId of userIds) {
-                const response = await fetch(API_URL + 'getSchedule/?id=' + userId);
+                const response = await fetch("https://intuition.onrender.com/getSchedule/?id=63fa537f5f0e6abd3e1c06ea/");
                 const json = await response.json();
-
+                console.log(json);
                 if (!newCalendar) newCalendar = json;
                 else {
                     for (i = 0; i < json.length; i++) {
                         newCalendar[i] += json[i];
                     }
                 }
+
             }
 
             for (i = 0; i < 7; i++) {
