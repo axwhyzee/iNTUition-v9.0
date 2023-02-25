@@ -12,12 +12,12 @@ import Signup from './pages/Signup';
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <Sidebar />
       <Routes>
           <Route path="/" element={<Login/>}/>
-          <Route path="/calendar" element={<Calendar />}/> 
-          <Route path="/home" element={<div><Mainpage/><Addtask/></div>}/>
+          <Route path="/calendar" element={<div><Navbar />
+      <Sidebar /><Calendar /></div>}/> 
+          <Route path="/home" element={<div><Navbar />
+      <Sidebar /><Mainpage/></div>}/>
           </Routes>
     </div>
   );

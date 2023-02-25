@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { Checkbox, FormControlLabel, FormGroup, Paper, Typography } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, Link, Paper, Typography } from '@mui/material';
 import Addtask from '../Addtask/Addtask';
 import Addmember from '../Addmember/Addmember';
 import './mainpage.css';
+import Addmeeting from "../Addmeeting/Addmeeting";
 
 
 function Mainpage() {
     const [tasks, setTasks] = useState(["task 1", "task 2", "task 3"]);
     const [completed, setCompleted] = useState([]);
+    const [meetings, setMeetings] = useState([{"title": "meeting 1", "date": new Date("2023-3-1"), "time": "9:00 PM", "link":"zoom.com", "pwd":"1234"}]);
 
     //retrieve from backend
     const deletetask = (e) => {
@@ -18,6 +20,13 @@ function Mainpage() {
         setCompleted(tempC)
     }
 
+    const deletemeeting = (e) => {
+        const temp = [...meetings];
+        temp.splice(temp.indexOf(e.target.value),1);
+        setMeetings(temp);
+    }
+
+
     return (
         <div className='main-wrapper'>
             <h1 className='project-title'>Project Jiraji</h1>
@@ -25,6 +34,7 @@ function Mainpage() {
             <div className='btn-wrapper'>
                 <Addtask />
                 <Addmember />
+                <Addmeeting />
             </div>
             <div className='kanban-board'>
                 <Paper className='single-board' elevation={2}>
@@ -47,6 +57,33 @@ function Mainpage() {
                                 <Typography sx={{ textDecoration: "line-through" }}>{x}</Typography>
                             )
                         })}
+                    </div>
+                </Paper>
+                <Paper className="single-board-meeting" elevation={2}>
+                    <div className="board-title">Upcoming meetings</div>
+                    <div className="board-content">
+                    <FormGroup row={false}>
+                        {meetings.map(x => {
+                            const now = new Date();
+                            console.log(x.date.getDate())
+                            if (x.date.getMonth() > now.getMonth() || (x.date.getMonth() === now.getMonth() && x.date.getDate() >= now.getDate())) {
+                                return(
+                                    <div>
+                                        <div style={{display:"flex", flexDirection:"row"}}>
+                                        <Checkbox value={x} checked={false} name={x} onChange={deletemeeting}/>
+                                        <Typography variant="h4" >{x.title}</Typography>
+                                        </div>
+                                        <Typography variant="h5" >{x.time}</Typography>
+                                        <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+                                        <Link variant="h7" href={x.link}>Meeting link</Link>
+                                        <Typography variant="h7">Password: {x.pwd}</Typography>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                            return null;
+                        })}
+                    </FormGroup>
                     </div>
                 </Paper>
             </div>
