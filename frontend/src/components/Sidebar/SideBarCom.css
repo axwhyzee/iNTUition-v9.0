@@ -14,7 +14,7 @@
   color: #222222;
   cursor: pointer;
   display: inline-block;
-  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
@@ -25,7 +25,7 @@
   text-align: center;
   text-decoration: none;
   touch-action: manipulation;
-  transition: box-shadow .2s,-ms-transform .1s,-webkit-transform .1s,transform .1s;
+  transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
   user-select: none;
   -webkit-user-select: none;
   width: 150px;
@@ -51,7 +51,8 @@
   opacity: 1;
 }
 
-.proj-com:hover, .delete-button:hover{
+.proj-com:hover,
+.delete-button:hover {
   transform: scale(1.1);
 }
 
@@ -63,4 +64,18 @@
   font-size: 20px;
   color: red;
   margin-right: 5px;
+}
+
+.sidebar-com {
+  width: 100%;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px 18px;
+  border-top: 1px solid #999;
+  transition: .5s;
+}
+
+.sidebar-com:hover {
+  background: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }

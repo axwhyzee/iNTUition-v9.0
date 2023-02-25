@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Checkbox, FormControlLabel, FormGroup, Link, Paper, Typography } from '@mui/material';
 import Addtask from '../Addtask/Addtask';
 import Addmember from '../Addmember/Addmember';
@@ -7,10 +7,24 @@ import Addmeeting from "../Addmeeting/Addmeeting";
 import CollatedCalendar from "../CollatedCalendar/CollatedCalendar";
 
 
-function Mainpage() {
-    const [tasks, setTasks] = useState(["task 1", "task 2", "task 3"]);
+function Mainpage({ project }) {
+    const [tasks, setTasks] = useState([]);
     const [completed, setCompleted] = useState([]);
     const [meetings, setMeetings] = useState([{ "title": "meeting 1", "date": new Date("2023-3-1"), "time": "9:00 PM", "link": "zoom.com", "pwd": "1234" }]);
+
+    useEffect(() => {
+        const newTasks = [];
+        const newCompleted = [];
+        if (!project) return;
+
+        for (const task of project['project_tasks']) {
+            if (task['completed']) newTasks.push(task['title']);
+            else newCompleted.push(task['title']);
+
+            setTasks(newTasks);
+            setCompleted(newCompleted);
+        }
+    }, [project]);
 
     //retrieve from backend
     const deletetask = (e) => {
@@ -30,8 +44,8 @@ function Mainpage() {
 
     return (
         <div className='main-wrapper'>
-            <h1 className='project-title'>Project Jiraji</h1>
-            <p className='project-desc'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum turpis quis iaculis condimentum. Vestibulum euismod, ex vitae convallis porta, odio magna venenatis mauris, eget pellentesque velit ante eu erat. Praesent ac tincidunt nunc. Donec enim lectus, malesuada porta imperdiet ultrices, mollis in ipsum. Duis euismod, sapien quis tincidunt consectetur, metus lectus placerat massa, a malesuada nisi massa vel quam. Integer euismod ut lectus eu bibendum. Duis nec lobortis magna. Phasellus augue metus, maximus vitae malesuada sit amet, sagittis sit amet lectus. Duis venenatis bibendum risus. Phasellus fringilla erat id ipsum scelerisque hendrerit. Vestibulum ac mi vel nisi viverra finibus quis sed magna.</p>
+            <h1 className='project-title'>{project ? project['project_title'] : ''}</h1>
+            <p className='project-desc'>{project ? project['project_desc'] : ''}</p>
             <div className='btn-wrapper'>
                 <Addtask />
                 <Addmember />
@@ -44,7 +58,6 @@ function Mainpage() {
                     <FormGroup row={false}>
                         {meetings.map(x => {
                             const now = new Date();
-                            console.log(x.date.getDate())
                             if (x.date.getMonth() > now.getMonth() || (x.date.getMonth() === now.getMonth() && x.date.getDate() >= now.getDate())) {
                                 return (
                                     <div>
