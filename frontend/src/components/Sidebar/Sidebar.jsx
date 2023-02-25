@@ -6,10 +6,16 @@ import SideBarCom from './SideBarCom';
 function Sidebar() {
     const [components, setComponents] = useState([]);
 
+    function handleDelete(i) {
+        let temp = components.slice();
+        console.log(i)
+        temp.splice(i,1)
+        setComponents(temp);
+    }
     function addNewComponent() {
         <input type="text"></input>
         const newComponent = (
-            <SideBarCom></SideBarCom>
+            <SideBarCom onDelete={handleDelete}></SideBarCom>
         );
 
         setComponents([...components, newComponent]);
