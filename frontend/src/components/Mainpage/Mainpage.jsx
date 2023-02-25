@@ -11,6 +11,7 @@ const t = {};
 
 function Mainpage() {
     const [tasks, setTasks] = useState([]);
+    const [members, setMembers] = useState([]);
     const [completed, setCompleted] = useState([]);
     const [meetings, setMeetings] = useState([]);
 
@@ -24,7 +25,11 @@ function Mainpage() {
         setTasks(temp);
         setCompleted(tempC);
     }
-
+    const deleteMember = (e) => {
+        const temp = [...members];
+        temp.splice(temp.indexOf(e.target.value), 1);
+        setMembers(temp);
+    }
     const deletemeeting = (e) => {
         const temp = [...meetings];
         temp.splice(temp.indexOf(e.target.value), 1);
@@ -61,13 +66,18 @@ function Mainpage() {
         }));
     }
 
+    const addMember = (e) => {
+        const f = new FormData(e.target)
+        const temp = [...members,f.get('projectmem')]
+        setMembers(temp);
+    }
     return (
         <div className='main-wrapper'>
             <h1 className='project-title'>Project Jiraji</h1>
             <p className='project-desc'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum turpis quis iaculis condimentum. Vestibulum euismod, ex vitae convallis porta, odio magna venenatis mauris, eget pellentesque velit ante eu erat. Praesent ac tincidunt nunc. Donec enim lectus, malesuada porta imperdiet ultrices, mollis in ipsum. Duis euismod, sapien quis tincidunt consectetur, metus lectus placerat massa, a malesuada nisi massa vel quam. Integer euismod ut lectus eu bibendum. Duis nec lobortis magna. Phasellus augue metus, maximus vitae malesuada sit amet, sagittis sit amet lectus. Duis venenatis bibendum risus. Phasellus fringilla erat id ipsum scelerisque hendrerit. Vestibulum ac mi vel nisi viverra finibus quis sed magna.</p>
             <div className='btn-wrapper'>
                 <Addtask addTask={addTask}/>
-                <Addmember />
+                <Addmember addMember={addMember}/>
                 <Addmeeting addMeeting={addMeeting}/>
             </div>
             <div className='kanban-hr'></div>
@@ -130,6 +140,18 @@ function Mainpage() {
                             return (
                                 
                                 <Typography variant="h5" sx={{ textDecoration: "line-through" }}>{c}</Typography>
+                            )
+                        })}
+                    </div>
+                </Paper>
+                <Paper className="single-board" elevation={2}>
+                        <div className="board-title">Member List</div>
+                        <div className='board-content'>
+                        {members.map(c => {
+                            return (
+                                <div>
+                                    <FormControlLabel value={c} control={<Checkbox value={c} checked={false} name={c} onChange={deleteMember} />} label={c} />
+                                </div>
                             )
                         })}
                     </div>
