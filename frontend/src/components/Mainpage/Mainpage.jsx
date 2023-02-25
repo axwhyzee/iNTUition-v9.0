@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Checkbox, FormControlLabel, FormGroup, Paper, Typography } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, Link, Paper, Typography } from '@mui/material';
 import Addtask from '../Addtask/Addtask';
 import Addmember from '../Addmember/Addmember';
 import './mainpage.css';
@@ -75,8 +75,8 @@ function Mainpage() {
                                         </div>
                                         <Typography variant="h5" >{x.time}</Typography>
                                         <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-                                        <Typography variant="h7" >{x.link}</Typography><nbsp /><nbsp /><nbsp /><nbsp />
-                                        <Typography variant="h7">{x.pwd}</Typography>
+                                        <Link variant="h7" href={x.link}>Meeting link</Link>
+                                        <Typography variant="h7">Password: {x.pwd}</Typography>
                                         </div>
                                     </div>
                                 )
