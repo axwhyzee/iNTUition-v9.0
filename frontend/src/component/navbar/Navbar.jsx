@@ -1,11 +1,20 @@
 import React from 'react';
 import './App.css';
 
-function App() {
+function Navbar() {
   return (
-    <div className="App">
-    </div>
+    <nav className="navbar">
+      <button>
+        Home
+      </button>
+      <button>
+
+      </button>
+      <button>
+
+      </button>
+    </nav>
   );
 }
 
-export default App;
+export default Navbar;
