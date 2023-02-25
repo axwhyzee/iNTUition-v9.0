@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from '../Navbar/Navbar';
+import Sidebar from '../Sidebar/Sidebar';
 import './calendar.css';
 
 function Calendar() {
@@ -23,9 +25,9 @@ function Calendar() {
     }, []);
 
     function toggleAvail(e, key, idx) {
-        if (e.type == 'mousedown') setMouseState(true);
+        if (e.type === 'mousedown') setMouseState(true);
 
-        if (e.type != 'mousedown' && !mouseState) return;
+        if (e.type !== 'mousedown' && !mouseState) return;
 
         const cloneCalendar = structuredClone(calendar);
         cloneCalendar[key][idx] = (calendar[key][idx] + 1) % 2;
@@ -36,7 +38,7 @@ function Calendar() {
     function getCellStyle(minutes, available) {
         let classStr = 'calendar-cell';
 
-        if (minutes % 60 == 0) classStr += ' calendar-cell-hour';
+        if (minutes % 60 === 0) classStr += ' calendar-cell-hour';
         classStr += (available) ? ' calendar-cell-green' : '';
 
         return classStr;
@@ -44,6 +46,8 @@ function Calendar() {
 
     return (
         <main className='calendar-wrapper'>
+            <Navbar/>
+            <Sidebar/>
             <table className='calendar'>
                 <tbody>
                     <tr>
@@ -59,8 +63,8 @@ function Calendar() {
                     {calendar ?
                         Object.entries(calendar).filter(filterByTime).map((value) => (
                             <tr className='calendar-row' key={value[0]}>
-                                {value[1][0] % 60 == 0 ? (
-                                    <td rowSpan='4' className='calendar-cell calendar-cell-timing'>{(value[1][0] % 60) == 0 ? value[0] : ''}</td>
+                                {value[1][0] % 60 === 0 ? (
+                                    <td rowSpan='4' className='calendar-cell calendar-cell-timing'>{(value[1][0] % 60) === 0 ? value[0] : ''}</td>
                                 ) : (<></>)
                                 }
                                 <td onMouseDown={(e) => toggleAvail(e, value[0], 1)}

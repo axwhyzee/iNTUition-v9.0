@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Checkbox, FormControlLabel, FormGroup, Paper, Typography, Box} from '@mui/material';
+import Navbar from "../Navbar/Navbar";
+import Sidebar from "../Sidebar/Sidebar";
 
 
 
@@ -18,6 +20,9 @@ function Mainpage() {
     }
 
     return (
+        <div>
+            <Navbar/>
+            <Sidebar/>
             <Box sx={{display:"flex", flexDirection:"row", justifyContent:"center", gap:3}}>
                 <Paper elevation="2" sx={{bgcolor:"#D8C3A5"}}>
                     <Typography variant="h3">To-do</Typography>
@@ -38,6 +43,7 @@ function Mainpage() {
                         })}
                 </Paper>
             </Box>
+        </div>
     )
 }
 // {/* <List sx={{bgcolor: 'background.paper' }}
