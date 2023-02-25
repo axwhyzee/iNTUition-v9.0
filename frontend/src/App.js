@@ -7,7 +7,7 @@ import { Route, Routes, useNavigate} from 'react-router-dom';
 import { Button } from '@mui/material';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Addtask from './components/Addtask/Addtask';
+
 function App() {
   return (
     <div className="App">
