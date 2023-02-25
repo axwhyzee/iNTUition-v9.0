@@ -5,7 +5,8 @@ const TaskSchema = new mongoose.Schema({
     telegramChatId: {type: String, required: true},
     description:{type:String, required:true},
     dueDate:{type:Date, required:true},
-    isCompleted:{type:Boolean,default:false}
+    isCompleted:{type:Boolean,default:false},
+    allocatedUser:{type:String,required:true}
 })
 
 const taskModel = mongoose.model('Task', TaskSchema);
