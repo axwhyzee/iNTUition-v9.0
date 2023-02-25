@@ -5,6 +5,7 @@ import Addmember from '../Addmember/Addmember';
 import './mainpage.css';
 import Addmeeting from "../Addmeeting/Addmeeting";
 import CollatedCalendar from "../CollatedCalendar/CollatedCalendar";
+import ClearIcon from '@mui/icons-material/Clear';
 
 
 function Mainpage() {
@@ -89,7 +90,7 @@ function Mainpage() {
                                     return (
                                         <div>
                                             <div style={{ display: "flex", flexDirection: "row" }}>
-                                                <Checkbox value={x} checked={false} name={x} onChange={deletemeeting} />
+                                                <Checkbox icon={<ClearIcon/>} value={x} checked={false} name={x} onChange={deletemeeting} />
                                                 <Typography variant="h4" >{x.title}</Typography>
                                             </div>
                                             <Typography variant="h5" >{x.time}</Typography>
