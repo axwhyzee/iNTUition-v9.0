@@ -4,6 +4,7 @@ import Addtask from '../Addtask/Addtask';
 import Addmember from '../Addmember/Addmember';
 import './mainpage.css';
 import Addmeeting from "../Addmeeting/Addmeeting";
+import CollatedCalendar from "../CollatedCalendar/CollatedCalendar";
 
 function Mainpage() {
     const [tasks, setTasks] = useState(["task 1", "task 2", "task 3"]);
@@ -35,7 +36,39 @@ function Mainpage() {
                 <Addmember />
                 <Addmeeting />
             </div>
+            <div className='kanban-hr'></div>
+            <Paper className="single-board-meeting" elevation={2}>
+                <div className="board-title">Upcoming meetings</div>
+                <div className="board-content">
+                    <FormGroup row={false}>
+                        {meetings.map(x => {
+                            const now = new Date();
+                            console.log(x.date.getDate())
+                            if (x.date.getMonth() > now.getMonth() || (x.date.getMonth() === now.getMonth() && x.date.getDate() >= now.getDate())) {
+                                return (
+                                    <div>
+                                        <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <Checkbox value={x} checked={false} name={x} onChange={deletemeeting} />
+                                            <Typography variant="h4" >{x.title}</Typography>
+                                        </div>
+                                        <Typography variant="h5" >{x.time}</Typography>
+                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "left" }}>
+                                            <Link variant="h7" href={x.link}>Meeting link</Link>
+                                            &nbsp;
+                                            &nbsp;
+                                            &nbsp;
+                                            <Typography variant="h7">Password: {x.pwd}</Typography>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                            return null;
+                        })}
+                    </FormGroup>
+                </div>
+            </Paper>
             <div className='kanban-board'>
+                <CollatedCalendar />
                 <Paper className='single-board' elevation={2}>
                     <div className='board-title'>To-do</div>
                     <div className='board-content'>
@@ -56,33 +89,6 @@ function Mainpage() {
                                 <Typography sx={{ textDecoration: "line-through" }}>{x}</Typography>
                             )
                         })}
-                    </div>
-                </Paper>
-                <Paper className="single-board-meeting" elevation={2}>
-                    <div className="board-title">Upcoming meetings</div>
-                    <div className="board-content">
-                        <FormGroup row={false}>
-                            {meetings.map(x => {
-                                const now = new Date();
-                                console.log(x.date.getDate())
-                                if (x.date.getMonth() > now.getMonth() || (x.date.getMonth() === now.getMonth() && x.date.getDate() >= now.getDate())) {
-                                    return (
-                                        <div>
-                                            <div style={{ display: "flex", flexDirection: "row" }}>
-                                                <Checkbox value={x} checked={false} name={x} onChange={deletemeeting} />
-                                                <Typography variant="h4" >{x.title}</Typography>
-                                            </div>
-                                            <Typography variant="h5" >{x.time}</Typography>
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                                                <Link variant="h7" href={x.link}>Meeting link</Link>
-                                                <Typography variant="h7">Password: {x.pwd}</Typography>
-                                            </div>
-                                        </div>
-                                    )
-                                }
-                                return null;
-                            })}
-                        </FormGroup>
                     </div>
                 </Paper>
             </div>

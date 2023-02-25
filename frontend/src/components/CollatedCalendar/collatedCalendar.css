@@ -1,0 +1,8 @@
+.collated-calendar {
+    margin-top: 40px;
+    border-collapse: collapse;
+}
+
+.calendar-cell-hover:hover {
+    border: 1px solid black;
+}
