@@ -34,7 +34,44 @@ function Calendar() {
         '22:00', '22:15', '22:30', '22:45',
         '23:00', '23:15', '23:30', '23:45'
     ]
+    const API_URL = 'https://localhost/8080/';
 
+    useEffect(() => {
+        const initCalendar = async () => {
+            const response = await fetch(API_URL + 'getSchedule');
+            const json = await response.json();
+
+            const tempCalendar = [];
+            let i = 0;
+
+            while (i < json.length) {
+                const row = [];
+                for (let j = 0; j < 4; j++) {
+                    row.push(json[i]);
+                    i++;
+                }
+                tempCalendar.push(row);
+            }
+            setCalendar(tempCalendar);
+        };
+        initCalendar();
+
+    }, []);
+
+    async function saveCalendar() {
+        const response = await fetch(API_URL + 'updateSchedule', {
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: `{
+                'userId': 1224,
+                'schedule': ${JSON.stringify(calendar.flat())}
+            }`,
+        });
+        console.log(response);
+    }
 
     function startToggle(row, col) {
         setToggleStart([row, col, calendar[row][col], true]);
@@ -74,6 +111,7 @@ function Calendar() {
 
     return (
         <main className='calendar-wrapper'>
+            <button className='save-calendar' onClick={saveCalendar}>SAVE</button>
             <table className='calendar'>
                 <tbody>
                     <tr>
