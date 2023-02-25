@@ -4,11 +4,16 @@
 }
 
 body {
-    background-color: #efdbaa;
+    background-image: url("/home/sqr/Repos/iNTUition-v9.0/frontend/src/assets/bg2.jpg");
+    background-repeat: no-repeat;
     margin: 0;
     padding: 0;
     padding-top: 74px;
     padding-left: 200px;
+}
+
+.App {
+    background-color: white;
 }
 
 .main-wrapper {

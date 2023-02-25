@@ -7,6 +7,7 @@ function Calendar() {
     const [endTime, setEndTime] = useState(23 * 4 + 2); // 23:30
     const [toggleStart, setToggleStart] = useState([0, 0, 0, false]);
     const today = (new Date()).getTime();
+    const userId = '63fa537f5f0e6abd3e1c06ea';
     const days = 7;
     const timings = [
         '00:00', '00:15', '00:30', '00:45',
@@ -34,41 +35,45 @@ function Calendar() {
         '22:00', '22:15', '22:30', '22:45',
         '23:00', '23:15', '23:30', '23:45'
     ]
-    const API_URL = 'https://localhost/8080/';
+    const API_URL = 'https://intuition.onrender.com/';
 
+    /*
     useEffect(() => {
         const initCalendar = async () => {
-            const response = await fetch(API_URL + 'getSchedule');
-            const json = await response.json();
-
+            const response = await fetch(API_URL + 'getSchedule/?id=' + userId);
+            //const json = (await response.json())['schedule']['schedule'];
+            //            console.log(json);
+            const json = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
             const tempCalendar = [];
-            let i = 0;
 
+            let i = 0;
             while (i < json.length) {
                 const row = [];
                 for (let j = 0; j < 4; j++) {
-                    row.push(json[i]);
-                    i++;
+                    row.push(json[i][j]);
                 }
                 tempCalendar.push(row);
             }
+            console.log(tempCalendar);
             setCalendar(tempCalendar);
         };
         initCalendar();
 
-    }, []);
+    }, []);*/
 
     async function saveCalendar() {
-        const response = await fetch(API_URL + 'updateSchedule', {
+        const temp = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+        console.log(temp.flat());
+        const response = await fetch(API_URL + '/updateSchedule', {
             method: 'PATCH',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: `{
-                'userId': 1224,
-                'schedule': ${JSON.stringify(calendar.flat())}
-            }`,
+            body: {
+                'userId': '63fa537f5f0e6abd3e1c06ea',
+                'schedule': temp.flat()
+            },
         });
         console.log(response);
     }
