@@ -14,7 +14,7 @@
 
 .login-btn:hover{
     box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
-    transition: box-shadow .2s;
+  	transition: box-shadow .2s;
 }
 
 .container {
