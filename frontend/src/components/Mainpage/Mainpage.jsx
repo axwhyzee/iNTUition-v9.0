@@ -152,7 +152,7 @@ function Mainpage({ project }) {
                                 <div>
                                     <div style={{ display: "flex", flexDirection: "row" }}>
                                         <Checkbox value={x} checked={false} name={x.title} onChange={(e) => { deletetask(e); completeTask(e); }} />
-                                        <Typography sx={{ paddingTop: 0.5 }} variant="h5">{x.title}</Typography>
+                                        <Typography sx={{ paddingTop: 0.5 }} variant="h8">{x.title}</Typography>
                                     </div>
                                     <div>
                                         <Typography fontSize={11}>Due: {x.date}</Typography>
