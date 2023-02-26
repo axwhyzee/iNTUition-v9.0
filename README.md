@@ -39,4 +39,4 @@ Transforming from a web application to a mobile application
 * [Chong Wei Kang](https://github.com/weikangg)
 * [Siah Wee Hung](https://github.com/axwhyzee)
 * [Sua Qi Rong](https://github.com/Soqoro)
-* [Syed Saad] (https://github.com/syed0059)
+* [Syed Saad](https://github.com/syed0059)
