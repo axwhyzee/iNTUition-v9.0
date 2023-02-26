@@ -13,7 +13,7 @@ All of our group members had similar sentiments that within our NTU life, there 
 Therefore, our group seeks to rely on automation and timely reminders by a Bot to more easily streamline the whole process of managing group projects for their modules.
 
 ## What it does
-Jiraji is a web application platform for all students to sync their availabilities for easy meeting coordination. It also allows the leader of the groups to add projects, tasks and meetings easily. Once a meeting has been set, a reminder will be sent through Telegram to each member who is included within the project itself.
+Jiraji is a web application platform for all students to sync their availabilities for easy meeting coordination. It also allows the leader of the groups to add projects, tasks and meetings easily. Once a meeting has been set, a reminder will be sent through the Telegram bot to each member who is included within the project itself. Additionally, it includes a calendar for group members to input their availabilities by choosing the relevant timeslots and it will be saved to the database. Thereafter, the group will be able to view the best timeslot for a meeting time. 
 
 ## How we built it
 We built it collectively using the MERN Stack, MongoDB, node.js, Express and React.js.
@@ -22,21 +22,21 @@ We built it collectively using the MERN Stack, MongoDB, node.js, Express and Rea
 Since most of the techniques were mostly not taught in school by the professors, we had to quickly adapt and learn as much as we could from online sources such as Stack Overflow, the official documentation, and Youtube itself.
 
 ## Accomplishments that we're proud of
-Clean and minimalistic UI for our frontend which did not utilise any templates and all of the code was written by hand by our front-end developers within the team
-Being able to perform CRUD operations on the mongo database
+- Clean and minimalistic UI for our frontend which did not utilise any templates and all of the code was written by hand by our front-end developers within the team
+- Being able to perform CRUD operations on the mongo database
 
 ## 🚶 What we learned
-How to work together as a team and collaborate using Github and Git
-New technologies we were unfamiliar with such as React and Express
-Using external APIs such as node-telegram-bot-api to perform certain functionalities with our bot
+- How to work together as a team and collaborate using Github and Git
+- New technologies we were unfamiliar with such as React and Express
+- Using external APIs such as node-telegram-bot-api to perform certain functionalities with our bot
 
 ## Google Slides:
 https://docs.google.com/presentation/d/1OHc2kqiYWt98VKsKANHwc7kITa6VQMIJFFkXHsRfskg/edit?usp=sharing
 
 ## What's next for Jiraji
-Scaling it up to support multiple users
-Making sure that the whole application runs smoothly without bugs
-Transforming from a web application to a mobile application
+- Scaling it up to support multiple users
+- Making sure that the whole application runs smoothly without bugs
+- Transforming from a web application to a mobile application
 
 # 🧑🏽‍🤝‍🧑🏽 Contributors
 * [Chong Wei Kang](https://github.com/weikangg)
