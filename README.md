@@ -37,6 +37,8 @@ https://docs.google.com/presentation/d/1OHc2kqiYWt98VKsKANHwc7kITa6VQMIJFFkXHsRf
 - Scaling it up to support multiple users
 - Making sure that the whole application runs smoothly without bugs
 - Transforming from a web application to a mobile application
+- Waterfall Charts
+- Zoom transcript summariser to help group members take minutes of the meeting
 
 # 🧑🏽‍🤝‍🧑🏽 Contributors
 * [Chong Wei Kang](https://github.com/weikangg)
