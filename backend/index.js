@@ -7,7 +7,6 @@ import User from './mongodb/models/user.js';
 import Project from './mongodb/models/project.js';
 import Task from './mongodb/models/task.js';
 import Meeting from './mongodb/models/meeting.js';
-import fetch from 'node-fetch';
 
 dotenv.config();
 const token = process.env.JIRAJI_BOT_KEY;
@@ -126,8 +125,7 @@ app.post('/createMeetings', async (req, res) => {
     }
 })
 
-//ADD MEMBERS TO PROJECT PATCH REQUEST
-//NEED TESTING
+// UPDATE MEMBERS TO PROJECT PATCH REQUEST
 app.patch("/updateMembers", async (req, res) => {
     try {
         const {userId ,projectMembers, projectId, projects} = req.body;
@@ -368,7 +366,7 @@ bot.onText(/meeting/, (msg, match) => {
 });
 
 // fetch data
-const response = await fetch("https://intuition.onrender.com/meetingTime");
-console.log(response);
+// const response = await fetch("https://intuition.onrender.com/meetingTime");
+// console.log(response);
 
 startServer();
