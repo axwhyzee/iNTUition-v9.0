@@ -8,7 +8,7 @@ import CollatedCalendar from "../CollatedCalendar/CollatedCalendar";
 import ClearIcon from '@mui/icons-material/Clear';
 import PersonIcon from '@mui/icons-material/Person';
 
-
+const JIRAJI_BOT_KEY = process.env.JIRAJI_BOT_KEY;
 function Mainpage({ project }) {
     const [tasks, setTasks] = useState([]);
     const [members, setMembers] = useState([]);
@@ -65,19 +65,16 @@ function Mainpage({ project }) {
         const obj = {"title": f.get("title"), "date":new Date(f.get("date")), "time":f.get("time"), "link":f.get("link"), "pwd":f.get("pwd")};
         const temp = [...meetings, obj];
         setMeetings(temp);
-
-        console.log(fetch("https://intuition.onrender.com/meetingTime/", {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: {
-                'title': obj.title,
-                'date': obj.date,
-                "time": obj.time
-            },
-        }));
+        console.log(obj);
+        const sendMessage = (e) => {
+            const chat_id = '-1001845261817';
+            const message = `Meeting set!\nTitle of meeting: ${obj.title}\nMeeting Date: ${obj.date}\nMeeting time: ${obj.time}`;
+            const url = `https://api.telegram.org/bot${JIRAJI_BOT_KEY}/sendMessage?chat_id=${chat_id}&text=${message}`;
+            const xht = new XMLHttpRequest();
+            xht.open("GET", url);
+            xht.send();
+        }
+        sendMessage();
     }
 
     const addMember = (e) => {
