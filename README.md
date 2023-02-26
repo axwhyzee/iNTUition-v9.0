@@ -1,6 +1,9 @@
 # Jiraji - Making project management easier for all.
 
+![Screenshot 2023-02-26 120329](https://user-images.githubusercontent.com/95838788/221418240-f1f77633-fc1b-40ff-b68f-5c0b12e2f445.jpg)
+
 ## ❓ Overview
+
 Our team aims to develop a web application (Jiraji) targeted towards the students in Singapore in improving their experience at managing their groups and streamlining the whole process.
 
 ## 💪 Inspiration
