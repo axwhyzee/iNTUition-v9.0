@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import './Login.css';
@@ -27,6 +27,8 @@ const Login = () => {
     <div className="container">
       <div className="form-container log-in-container">
         <div>
+          <Typography variant="h4" textAlign="center" fontWeight="bold">Jiraji</Typography>
+          <Typography variant="h8" sx={{color:"#666666"}}>Project management made easy</Typography><br/><br/>
           <Button sx={{ bgcolor: login ? "#fae4b1" : "#fffaef" }} onClick={lgin}>Login</Button>
           <Button sx={{ bgcolor: login ? "#fffaef" : "#fae4b1" }} onClick={sgnup}>Signup!</Button>
         </div>
