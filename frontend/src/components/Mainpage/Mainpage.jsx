@@ -14,20 +14,21 @@ function Mainpage({ project }) {
     const [members, setMembers] = useState([]);
     const [completed, setCompleted] = useState([]);
     const [meetings, setMeetings] = useState([]);
-    
+
     useEffect(() => {
         const newTasks = [];
         const newCompleted = [];
         if (!project) return;
 
+        console.log('fepojwef');
         for (const task of project['project_tasks']) {
-            if (task['completed']) newTasks.push({"title": task["title"], "date":task["date"], "assigned":task["assigned"]});
+            if (task['completed']) newTasks.push({ "title": task["title"], "date": task["date"], "assigned": task["assigned"] });
             else newCompleted.push(task['title']);
 
             setTasks(newTasks);
             setCompleted(newCompleted);
         }
-    }, [project]);
+    }, []);
 
     //retrieve from backend
     const deletetask = (e) => {
@@ -55,34 +56,40 @@ function Mainpage({ project }) {
     const addTask = (e) => {
         const f = new FormData(e.target);
         console.log(f.get("duedate"))
-        const obj = {"title": f.get("description"), "date":f.get("duedate"), "assigned":f.get("assignedmem")};
+        const obj = { "title": f.get("description"), "date": f.get("duedate"), "assigned": f.get("assignedmem") };
         const temp = [...tasks, obj];
         setTasks(temp);
     }
 
-    const addMeeting = (e) => {
+    const addMeeting = async (e) => {
         const f = new FormData(e.target);
-        const obj = {"title": f.get("title"), "date":new Date(f.get("date")), "time":f.get("time"), "link":f.get("link"), "pwd":f.get("pwd")};
+        const obj = { "title": f.get("title"), "date": new Date(f.get("date")), "time": f.get("time"), "link": f.get("link"), "pwd": f.get("pwd") };
         const temp = [...meetings, obj];
+
+        console.log(temp);
         setMeetings(temp);
 
-        console.log(fetch("https://intuition.onrender.com/meetingTime/", {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: {
-                'title': obj.title,
-                'date': obj.date,
-                "time": obj.time
-            },
-        }));
+        try {
+            console.log(await fetch("https://intuition.onrender.com/meetingTime/", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: {
+                    'title': obj.title,
+                    'date': obj.date,
+                    "time": obj.time
+                },
+            }));
+        } catch {
+            return;
+        }
     }
 
     const addMember = (e) => {
         const f = new FormData(e.target)
-        const temp = [...members,f.get('projectmem')]
+        const temp = [...members, f.get('projectmem')]
         setMembers(temp);
     }
     return (
@@ -90,9 +97,9 @@ function Mainpage({ project }) {
             <h1 className='project-title'>{project ? project['project_title'] : ''}</h1>
             <p className='project-desc'>{project ? project['project_desc'] : ''}</p>
             <div className='btn-wrapper'>
-                <Addtask addTask={addTask}/>
-                <Addmember addMember={addMember}/>
-                <Addmeeting addMeeting={addMeeting}/>
+                <Addtask addTask={addTask} />
+                <Addmember addMember={addMember} />
+                <Addmeeting addMeeting={addMeeting} />
             </div>
             <div className='kanban-hr'></div>
             <Paper className="single-board-meeting" elevation={2}>
@@ -105,7 +112,7 @@ function Mainpage({ project }) {
                                 return (
                                     <div>
                                         <div style={{ display: "flex", flexDirection: "row" }}>
-                                            <Checkbox icon={<ClearIcon/>} value={x} checked={false} name={x} onChange={deletemeeting} />
+                                            <Checkbox icon={<ClearIcon />} value={x} checked={false} name={x} onChange={deletemeeting} />
                                             <Typography variant="h4" >{x.title}</Typography>
                                         </div>
                                         <Typography variant="h5" >{x.time}</Typography>
@@ -129,20 +136,20 @@ function Mainpage({ project }) {
                 <Paper className='single-board' elevation={2}>
                     <div className='board-title'>To-do</div>
                     <div className='board-content'>
-                            {tasks.map(x => {
-                                return (
+                        {tasks.map(x => {
+                            return (
+                                <div>
+                                    <div style={{ display: "flex", flexDirection: "row" }}>
+                                        <Checkbox value={x} checked={false} name={x.title} onChange={(e) => { deletetask(e); completeTask(e); }} />
+                                        <Typography sx={{ paddingTop: 0.5 }} variant="h5">{x.title}</Typography>
+                                    </div>
                                     <div>
-                                        <div style={{display:"flex", flexDirection:"row"}}>
-                                            <Checkbox value={x} checked={false} name={x.title} onChange={(e) => {deletetask(e); completeTask(e);}} />
-                                            <Typography sx={{paddingTop:0.5}} variant="h5">{x.title}</Typography>
-                                        </div>
-                                        <div>
                                         <Typography fontSize={11}>Due: {x.date}</Typography>
                                         <Typography fontSize={11}>Assigned: {x.assigned}</Typography>
-                                        </div>
                                     </div>
-                                )
-                            })}
+                                </div>
+                            )
+                        })}
                     </div>
                 </Paper>
                 <Paper className='single-board' elevation={2}>
@@ -150,19 +157,19 @@ function Mainpage({ project }) {
                     <div className='board-content'>
                         {completed.map(c => {
                             return (
-                                
+
                                 <Typography variant="h5" sx={{ textDecoration: "line-through" }}>{c}</Typography>
                             )
                         })}
                     </div>
                 </Paper>
                 <Paper className="single-board" elevation={2}>
-                        <div className="board-title">Member List</div>
-                        <div className='board-content'>
+                    <div className="board-title">Member List</div>
+                    <div className='board-content'>
                         {members.map(c => {
                             return (
                                 <div>
-                                    <FormControlLabel value={c} control={<Checkbox icon={<PersonIcon/>} value={c} checked={false} name={c} onChange={deleteMember} />} label={c} />
+                                    <FormControlLabel value={c} control={<Checkbox icon={<PersonIcon />} value={c} checked={false} name={c} onChange={deleteMember} />} label={c} />
                                 </div>
                             )
                         })}
