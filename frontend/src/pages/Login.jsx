@@ -24,8 +24,8 @@ const Login = () => {
   }
 
   return (
-      <div class="container">
-        <div class="form-container log-in-container">
+      <div className="container">
+        <div className="form-container log-in-container">
           <div>
             <Button sx={{ bgcolor: login ? "#fae4b1" : "#fffaef" }} onClick={lgin}>Login</Button>
             <Button sx={{ bgcolor: login ? "#fffaef" : "#fae4b1" }} onClick={sgnup}>Signup!</Button>
@@ -57,7 +57,7 @@ const Login = () => {
               <button variant="contained" className="login-btn" onClick={() => { navigate("/home") }}>Sign up</button>
             </form>}
         </div>
-        <div class="overlay-container">
+        <div className="overlay-container">
         </div>
       </div>
 
