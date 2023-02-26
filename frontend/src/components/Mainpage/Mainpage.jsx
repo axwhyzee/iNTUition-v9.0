@@ -8,7 +8,7 @@ import CollatedCalendar from "../CollatedCalendar/CollatedCalendar";
 import ClearIcon from '@mui/icons-material/Clear';
 import PersonIcon from '@mui/icons-material/Person';
 
-
+const JIRAJI_BOT_KEY = process.env.JIRAJI_BOT_KEY;
 function Mainpage({ project }) {
     const [tasks, setTasks] = useState([]);
     const [members, setMembers] = useState([]);
@@ -85,6 +85,17 @@ function Mainpage({ project }) {
         } catch {
             return;
         }
+
+        console.log(obj);
+        const sendMessage = (e) => {
+            const chat_id = '-1001845261817';
+            const message = `Meeting set!\nTitle of meeting: ${obj.title}\nMeeting Date: ${obj.date}\nMeeting time: ${obj.time}`;
+            const url = `https://api.telegram.org/bot${JIRAJI_BOT_KEY}/sendMessage?chat_id=${chat_id}&text=${message}`;
+            const xht = new XMLHttpRequest();
+            xht.open("GET", url);
+            xht.send();
+        }
+        sendMessage(e);
     }
 
     const addMember = (e) => {
@@ -103,7 +114,7 @@ function Mainpage({ project }) {
             </div>
             <div className='kanban-hr'></div>
             <Paper className="single-board-meeting" elevation={2}>
-                <div className="board-title">Upcoming meetings</div>
+                <div className="board-title" style={{fontSize:17}}>Upcoming meetings</div>
                 <div className="board-content">
                     <FormGroup row={false}>
                         {meetings.map(x => {
@@ -115,7 +126,7 @@ function Mainpage({ project }) {
                                             <Checkbox icon={<ClearIcon />} value={x} checked={false} name={x} onChange={deletemeeting} />
                                             <Typography variant="h4" >{x.title}</Typography>
                                         </div>
-                                        <Typography variant="h5" >{x.time}</Typography>
+                                        <Typography variant="h6" >{x.time}</Typography>
                                         <div style={{ display: "flex", flexDirection: "row", justifyContent: "left" }}>
                                             <Link variant="h7" href={x.link}>Meeting link</Link>
                                             &nbsp;
@@ -134,7 +145,7 @@ function Mainpage({ project }) {
             <div className='kanban-board'>
                 <CollatedCalendar />
                 <Paper className='single-board' elevation={2}>
-                    <div className='board-title'>To-do</div>
+                    <div className='board-title' style={{fontSize:17}}>To-do</div>
                     <div className='board-content'>
                         {tasks.map(x => {
                             return (
@@ -153,19 +164,18 @@ function Mainpage({ project }) {
                     </div>
                 </Paper>
                 <Paper className='single-board' elevation={2}>
-                    <div className='board-title'>Completed</div>
+                    <div className='board-title' style={{fontSize:17}}>Completed</div>
                     <div className='board-content'>
                         {completed.map(c => {
-                            return (
-
-                                <Typography variant="h5" sx={{ textDecoration: "line-through" }}>{c}</Typography>
+                            return (                      
+                                <Typography variant="h6" sx={{ textDecoration: "line-through" }}>{c}</Typography>
                             )
                         })}
                     </div>
                 </Paper>
                 <Paper className="single-board" elevation={2}>
-                    <div className="board-title">Member List</div>
-                    <div className='board-content'>
+                        <div className="board-title" style={{fontSize:17}}>Member List</div>
+                        <div className='board-content'>
                         {members.map(c => {
                             return (
                                 <div>
