@@ -105,8 +105,8 @@ function Mainpage({ project }) {
     }
     return (
         <div className='main-wrapper'>
-            <h1 className='project-title'>{project ? project['project_title'] : ''}</h1>
-            <p className='project-desc'>{project ? project['project_desc'] : ''}</p>
+            <h1 className='project-title'>{project ? project['project_title'] : 'Edit project title'}</h1>
+            <p className='project-desc'>{project ? project['project_desc'] : 'Edit project description'}</p>
             <div className='btn-wrapper'>
                 <Addtask addTask={addTask} />
                 <Addmember addMember={addMember} />

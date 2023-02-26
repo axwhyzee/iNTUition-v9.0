@@ -10,6 +10,7 @@
   padding: 10px;
   border-style: outset;
   background-color: #fff3e2;
+  text-align: center;
 }
 
 .add-button {
@@ -32,7 +33,7 @@
   padding-left: 16px;
   padding-right: 16px;
   position: relative;
-  text-align: left;
+  text-align: center;
   text-decoration: none;
   transition: box-shadow .15s,transform .15s;
   user-select: none;
@@ -40,7 +41,7 @@
   touch-action: manipulation;
   white-space: nowrap;
   will-change: box-shadow,transform;
-  font-size: 18px;
+  font-size: 19px;
   margin-bottom: 5px;
 }
 
