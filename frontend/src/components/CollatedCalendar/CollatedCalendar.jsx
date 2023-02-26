@@ -92,11 +92,11 @@ function CollatedCalendar() {
                                     ) : (<></>)
                                 }
                                 <td style={{ background: `rgba(50, 100, 50, ${0.7 * value[0] / userIds.length})` }} className={'calendar-cell calendar-cell-hover' + (idx % 4 == 0 ? ' calendar-cell-hour' : '')}></td>
-                                <td style={{ background: `rgba(50, 100, 50, ${0.7 * 1 / userIds.length})` }} className={'calendar-cell calendar-cell-hover' + (idx % 4 == 0 ? ' calendar-cell-hour' : '')}></td>
-                                <td style={{ background: `rgba(50, 100, 50, ${0.7 * 2 / userIds.length})` }} className={'calendar-cell calendar-cell-hover' + (idx % 4 == 0 ? ' calendar-cell-hour' : '')}></td>
-                                <td style={{ background: `rgba(50, 100, 50, ${0.7 * 3 / userIds.length})` }} className={'calendar-cell calendar-cell-hover' + (idx % 4 == 0 ? ' calendar-cell-hour' : '')}></td>
-                                <td style={{ background: `rgba(50, 100, 50, ${0.7 * 4 / userIds.length})` }} className={'calendar-cell calendar-cell-hover' + (idx % 4 == 0 ? ' calendar-cell-hour' : '')}></td>
-                                <td style={{ background: `rgba(50, 100, 50, ${0.7 * 5 / userIds.length})` }} className={'calendar-cell calendar-cell-hover' + (idx % 4 == 0 ? ' calendar-cell-hour' : '')}></td>
+                                <td style={{ background: `rgba(50, 100, 50, ${0.7 * value[1] / userIds.length})` }} className={'calendar-cell calendar-cell-hover' + (idx % 4 == 0 ? ' calendar-cell-hour' : '')}></td>
+                                <td style={{ background: `rgba(50, 100, 50, ${0.7 * value[2] / userIds.length})` }} className={'calendar-cell calendar-cell-hover' + (idx % 4 == 0 ? ' calendar-cell-hour' : '')}></td>
+                                <td style={{ background: `rgba(50, 100, 50, ${0.7 * value[3] / userIds.length})` }} className={'calendar-cell calendar-cell-hover' + (idx % 4 == 0 ? ' calendar-cell-hour' : '')}></td>
+                                <td style={{ background: `rgba(50, 100, 50, ${0.7 * value[4] / userIds.length})` }} className={'calendar-cell calendar-cell-hover' + (idx % 4 == 0 ? ' calendar-cell-hour' : '')}></td>
+                                <td style={{ background: `rgba(50, 100, 50, ${0.7 * value[5] / userIds.length})` }} className={'calendar-cell calendar-cell-hover' + (idx % 4 == 0 ? ' calendar-cell-hour' : '')}></td>
                                 <td style={{ background: `rgba(50, 100, 50, ${0.7 * value[6] / userIds.length})` }} className={'calendar-cell calendar-cell-hover' + (idx % 4 == 0 ? ' calendar-cell-hour' : '')}></td>
                             </tr>
                             : <></>
