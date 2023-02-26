@@ -96,7 +96,7 @@ function Mainpage({ project }) {
             </div>
             <div className='kanban-hr'></div>
             <Paper className="single-board-meeting" elevation={2}>
-                <div className="board-title">Upcoming meetings</div>
+                <div className="board-title" style={{fontSize:17}}>Upcoming meetings</div>
                 <div className="board-content">
                     <FormGroup row={false}>
                         {meetings.map(x => {
@@ -106,9 +106,9 @@ function Mainpage({ project }) {
                                     <div>
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <Checkbox icon={<ClearIcon/>} value={x} checked={false} name={x} onChange={deletemeeting} />
-                                            <Typography variant="h4" >{x.title}</Typography>
+                                            <Typography variant="h5" >{x.title}</Typography>
                                         </div>
-                                        <Typography variant="h5" >{x.time}</Typography>
+                                        <Typography variant="h6" >{x.time}</Typography>
                                         <div style={{ display: "flex", flexDirection: "row", justifyContent: "left" }}>
                                             <Link variant="h7" href={x.link}>Meeting link</Link>
                                             &nbsp;
@@ -127,14 +127,14 @@ function Mainpage({ project }) {
             <div className='kanban-board'>
                 <CollatedCalendar />
                 <Paper className='single-board' elevation={2}>
-                    <div className='board-title'>To-do</div>
+                    <div className='board-title' style={{fontSize:17}}>To-do</div>
                     <div className='board-content'>
                             {tasks.map(x => {
                                 return (
                                     <div>
                                         <div style={{display:"flex", flexDirection:"row"}}>
                                             <Checkbox value={x} checked={false} name={x.title} onChange={(e) => {deletetask(e); completeTask(e);}} />
-                                            <Typography sx={{paddingTop:0.5}} variant="h5">{x.title}</Typography>
+                                            <Typography sx={{paddingTop:0.5}} variant="h6">{x.title}</Typography>
                                         </div>
                                         <div>
                                         <Typography fontSize={11}>Due: {x.date}</Typography>
@@ -146,18 +146,18 @@ function Mainpage({ project }) {
                     </div>
                 </Paper>
                 <Paper className='single-board' elevation={2}>
-                    <div className='board-title'>Completed</div>
+                    <div className='board-title' style={{fontSize:17}}>Completed</div>
                     <div className='board-content'>
                         {completed.map(c => {
                             return (
                                 
-                                <Typography variant="h5" sx={{ textDecoration: "line-through" }}>{c}</Typography>
+                                <Typography variant="h6" sx={{ textDecoration: "line-through" }}>{c}</Typography>
                             )
                         })}
                     </div>
                 </Paper>
                 <Paper className="single-board" elevation={2}>
-                        <div className="board-title">Member List</div>
+                        <div className="board-title" style={{fontSize:17}}>Member List</div>
                         <div className='board-content'>
                         {members.map(c => {
                             return (
