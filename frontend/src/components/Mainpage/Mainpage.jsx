@@ -8,21 +8,20 @@ import CollatedCalendar from "../CollatedCalendar/CollatedCalendar";
 import ClearIcon from '@mui/icons-material/Clear';
 import PersonIcon from '@mui/icons-material/Person';
 
-const t = {};
 
 function Mainpage({ project }) {
     const [tasks, setTasks] = useState([]);
     const [members, setMembers] = useState([]);
     const [completed, setCompleted] = useState([]);
     const [meetings, setMeetings] = useState([]);
-
+    
     useEffect(() => {
         const newTasks = [];
         const newCompleted = [];
         if (!project) return;
 
         for (const task of project['project_tasks']) {
-            if (task['completed']) newTasks.push(task['title']);
+            if (task['completed']) newTasks.push({"title": task["title"], "date":task["date"], "assigned":task["assigned"]});
             else newCompleted.push(task['title']);
 
             setTasks(newTasks);
@@ -33,12 +32,15 @@ function Mainpage({ project }) {
     //retrieve from backend
     const deletetask = (e) => {
         const temp = [...tasks];
-        const tempC = [...completed, e.target.name];
-        console.log(temp.indexOf(e.target.value), "index");
         temp.splice(temp.indexOf(e.target.value), 1);
         setTasks(temp);
-        setCompleted(tempC);
     }
+
+    const completeTask = (e) => {
+        console.log(e.target.name);
+        const temp = [...completed, e.target.name];
+        setCompleted(temp)
+    };
     const deleteMember = (e) => {
         const temp = [...members];
         temp.splice(temp.indexOf(e.target.value), 1);
@@ -53,10 +55,8 @@ function Mainpage({ project }) {
     const addTask = (e) => {
         const f = new FormData(e.target);
         console.log(f.get("duedate"))
-        const obj = {"desc": f.get("description"), "date":f.get("duedate"), "assigned":f.get("assignedmem")};
-        t[f.get("description")] = obj;
-        console.log("T", t);
-        const temp = [...tasks, f.get("description")];
+        const obj = {"title": f.get("description"), "date":f.get("duedate"), "assigned":f.get("assignedmem")};
+        const temp = [...tasks, obj];
         setTasks(temp);
     }
 
@@ -130,16 +130,15 @@ function Mainpage({ project }) {
                     <div className='board-title'>To-do</div>
                     <div className='board-content'>
                             {tasks.map(x => {
-                                console.log(t[`${x}`])
                                 return (
                                     <div>
                                         <div style={{display:"flex", flexDirection:"row"}}>
-                                            <Checkbox value={x} checked={false} name={x} onChange={deletetask} />
-                                            <Typography sx={{paddingTop:0.5}} variant="h5">{x}</Typography>
+                                            <Checkbox value={x} checked={false} name={x.title} onChange={(e) => {deletetask(e); completeTask(e);}} />
+                                            <Typography sx={{paddingTop:0.5}} variant="h5">{x.title}</Typography>
                                         </div>
                                         <div>
-                                        <Typography fontSize={11}>Due: {t[`${x}`]["date"]}</Typography>
-                                        <Typography fontSize={11}>Assigned: {t[`${x}`]["assigned"]}</Typography>
+                                        <Typography fontSize={11}>Due: {x.date}</Typography>
+                                        <Typography fontSize={11}>Assigned: {x.assigned}</Typography>
                                         </div>
                                     </div>
                                 )
