@@ -105,8 +105,8 @@ function Mainpage({ project }) {
     }
     return (
         <div className='main-wrapper'>
-            <h1 className='project-title'>{project ? project['project_title'] : ''}</h1>
-            <p className='project-desc'>{project ? project['project_desc'] : ''}</p>
+            <h1 className='project-title'>{project ? project['project_title'] : 'Edit project title'}</h1>
+            <p className='project-desc'>{project ? project['project_desc'] : 'Edit project description'}</p>
             <div className='btn-wrapper'>
                 <Addtask addTask={addTask} />
                 <Addmember addMember={addMember} />
@@ -123,16 +123,16 @@ function Mainpage({ project }) {
                                 return (
                                     <div>
                                         <div style={{ display: "flex", flexDirection: "row" }}>
-                                            <Checkbox icon={<ClearIcon />} value={x} checked={false} name={x} onChange={deletemeeting} />
-                                            <Typography variant="h4" >{x.title}</Typography>
+                                            <Checkbox icon={<ClearIcon/>} value={x} checked={false} name={x} onChange={deletemeeting} />
+                                            <Typography variant="h6" >{x.title}</Typography>
                                         </div>
-                                        <Typography variant="h6" >{x.time}</Typography>
+                                        <Typography variant="h7" >{x.time}</Typography>
                                         <div style={{ display: "flex", flexDirection: "row", justifyContent: "left" }}>
-                                            <Link variant="h7" href={x.link}>Meeting link</Link>
+                                            <Link variant="h8" href={x.link}>Meeting link</Link>
                                             &nbsp;
                                             &nbsp;
                                             &nbsp;
-                                            <Typography variant="h7">Password: {x.pwd}</Typography>
+                                            <Typography variant="h8">Password: {x.pwd}</Typography>
                                         </div>
                                     </div>
                                 )
@@ -167,8 +167,9 @@ function Mainpage({ project }) {
                     <div className='board-title' style={{fontSize:17}}>Completed</div>
                     <div className='board-content'>
                         {completed.map(c => {
-                            return (                      
-                                <Typography variant="h6" sx={{ textDecoration: "line-through" }}>{c}</Typography>
+                            return (
+                                
+                                <Typography variant="h8" sx={{ textDecoration: "line-through" }}>{c}</Typography>
                             )
                         })}
                     </div>
