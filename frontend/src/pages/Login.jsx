@@ -24,14 +24,28 @@ const Login = () => {
   }
 
   return (
-      <div className="container">
-        <div className="form-container log-in-container">
-          <div>
-            <Button sx={{ bgcolor: login ? "#fae4b1" : "#fffaef" }} onClick={lgin}>Login</Button>
-            <Button sx={{ bgcolor: login ? "#fffaef" : "#fae4b1" }} onClick={sgnup}>Signup!</Button>
-          </div>
-          {login ? <form className="login" onSubmit={handleSubmit}>
-            <h3>Log In</h3>
+    <div className="container">
+      <div className="form-container log-in-container">
+        <div>
+          <Button sx={{ bgcolor: login ? "#fae4b1" : "#fffaef" }} onClick={lgin}>Login</Button>
+          <Button sx={{ bgcolor: login ? "#fffaef" : "#fae4b1" }} onClick={sgnup}>Signup!</Button>
+        </div>
+        {login ? <form className="login" onSubmit={handleSubmit}>
+          <h3>Log In</h3>
+
+          <TextField
+            onChange={(e) => setUsername(e.target.value)}
+            value={username} variant="outlined" id="Username" name="username" label='Username' />
+
+          <TextField
+            onChange={(e) => setPassword(e.target.value)}
+            value={password} variant="outlined" id="Password" name="password" label='Password' type="password" />
+
+          <button variant="contained" className="login-btn" onClick={() => {
+            if (password === "password8291" && username === "kirthi") { navigate("/home") }
+          }}>Log in</button></form>
+          : <form className="signup" onSubmit={handleSubmit}>
+            <h3>Sign Up</h3>
 
             <TextField
               onChange={(e) => setUsername(e.target.value)}
@@ -39,27 +53,14 @@ const Login = () => {
 
             <TextField
               onChange={(e) => setPassword(e.target.value)}
-              value={password} variant="outlined" id="Password" name="password" label='Password' type="password"/>
+              value={password} variant="outlined" id="Password" name="password" label='Password' type="password" />
 
-            <button variant="contained" className="login-btn" onClick={() => { 
-              if (password === "password" && username === "kirthi") {navigate("/home")}}}>Log in</button></form>
-            : <form className="signup" onSubmit={handleSubmit}>
-              <h3>Sign Up</h3>
-
-              <TextField
-                onChange={(e) => setUsername(e.target.value)}
-                value={username} variant="outlined" id="Username" name="username" label='Username' />
-
-              <TextField
-                onChange={(e) => setPassword(e.target.value)}
-                value={password} variant="outlined" id="Password" name="password" label='Password' type="password"/>
-
-              <button variant="contained" className="login-btn" onClick={() => { navigate("/home") }}>Sign up</button>
-            </form>}
-        </div>
-        <div className="overlay-container">
-        </div>
+            <button variant="contained" className="login-btn" onClick={() => { navigate("/home") }}>Sign up</button>
+          </form>}
       </div>
+      <div className="overlay-container">
+      </div>
+    </div>
 
     /*<div>
         <Button sx={{ bgcolor: login ? "#E98074" : "#D8C3A5" }} onClick={lgin}>Login</Button><Button sx={{ bgcolor: login ? "#D8C3A5" : "#E98074" }} onClick={sgnup}>Signup!</Button>
