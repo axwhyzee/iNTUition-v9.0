@@ -1,6 +1,6 @@
 # Jiraji - Making project management easier for all.
 
-![Screenshot 2023-02-26 120329](https://user-images.githubusercontent.com/95838788/221418240-f1f77633-fc1b-40ff-b68f-5c0b12e2f445.jpg)
+![image](https://user-images.githubusercontent.com/95838788/221418240-f1f77633-fc1b-40ff-b68f-5c0b12e2f445.jpg)
 
 ## ❓ Overview
 
