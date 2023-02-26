@@ -74,7 +74,7 @@ function Mainpage({ project }) {
             xht.open("GET", url);
             xht.send();
         }
-        sendMessage();
+        sendMessage(e);
     }
 
     const addMember = (e) => {
