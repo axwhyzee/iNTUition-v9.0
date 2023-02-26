@@ -17,7 +17,7 @@ function Sidebar({ projects, handleDelete, handleAdd, handleSet }) {
     }
 
     function handleKeyDown(key) {
-        if (key == 'Enter' && editFlag) {
+        if (key === 'Enter' && editFlag) {
             setEditFlag(false);
             handleAdd(inputString);
         }
