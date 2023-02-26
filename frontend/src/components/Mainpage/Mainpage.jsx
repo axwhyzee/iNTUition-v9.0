@@ -103,15 +103,15 @@ function Mainpage({ project }) {
                                     <div>
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <Checkbox icon={<ClearIcon/>} value={x} checked={false} name={x} onChange={deletemeeting} />
-                                            <Typography variant="h5" >{x.title}</Typography>
+                                            <Typography variant="h6" >{x.title}</Typography>
                                         </div>
-                                        <Typography variant="h6" >{x.time}</Typography>
+                                        <Typography variant="h7" >{x.time}</Typography>
                                         <div style={{ display: "flex", flexDirection: "row", justifyContent: "left" }}>
-                                            <Link variant="h7" href={x.link}>Meeting link</Link>
+                                            <Link variant="h8" href={x.link}>Meeting link</Link>
                                             &nbsp;
                                             &nbsp;
                                             &nbsp;
-                                            <Typography variant="h7">Password: {x.pwd}</Typography>
+                                            <Typography variant="h8">Password: {x.pwd}</Typography>
                                         </div>
                                     </div>
                                 )
@@ -131,7 +131,7 @@ function Mainpage({ project }) {
                                     <div>
                                         <div style={{display:"flex", flexDirection:"row"}}>
                                             <Checkbox value={x} checked={false} name={x.title} onChange={(e) => {deletetask(e); completeTask(e);}} />
-                                            <Typography sx={{paddingTop:0.5}} variant="h6">{x.title}</Typography>
+                                            <Typography sx={{paddingTop:0.5}} variant="h8">{x.title}</Typography>
                                         </div>
                                         <div>
                                         <Typography fontSize={11}>Due: {x.date}</Typography>
@@ -148,7 +148,7 @@ function Mainpage({ project }) {
                         {completed.map(c => {
                             return (
                                 
-                                <Typography variant="h6" sx={{ textDecoration: "line-through" }}>{c}</Typography>
+                                <Typography variant="h8" sx={{ textDecoration: "line-through" }}>{c}</Typography>
                             )
                         })}
                     </div>
