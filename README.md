@@ -47,7 +47,3 @@ https://docs.google.com/presentation/d/1OHc2kqiYWt98VKsKANHwc7kITa6VQMIJFFkXHsRf
 * [Siah Wee Hung](https://github.com/axwhyzee)
 * [Sua Qi Rong](https://github.com/Soqoro)
 * [Syed Saad](https://github.com/syed0059)
-
-## More Screenshots
-
-![dashboard](https://github.com/weikangg/iNTUition-v9.0/blob/996ac67725c98ba5a3f4b53aad989df996fef33e/frontend/src/assets/dashboardSS.png "title-1") ![calendar](https://github.com/weikangg/iNTUition-v9.0/blob/996ac67725c98ba5a3f4b53aad989df996fef33e/frontend/src/assets/calendarSS.png "title-2")
