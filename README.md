@@ -12,6 +12,8 @@ All of our group members had similar sentiments that within our NTU life, there 
 ## 🗣️ Solution
 Therefore, our group seeks to rely on automation and timely reminders by a Bot to more easily streamline the whole process of managing group projects for their modules.
 
+We also developed an accompanying webapp to streamline the management of projects by consolidating all the relevant information.
+
 ## What it does
 Jiraji is a web application platform for all students to sync their availabilities for easy meeting coordination. It also allows the leader of the groups to add projects, tasks and meetings easily. Once a meeting has been set, a reminder will be sent through the Telegram bot to each member who is included within the project itself. Additionally, it includes a calendar for group members to input their availabilities by choosing the relevant timeslots and it will be saved to the database. Thereafter, the group will be able to view the best timeslot for a meeting time. 
 
@@ -45,3 +47,7 @@ https://docs.google.com/presentation/d/1OHc2kqiYWt98VKsKANHwc7kITa6VQMIJFFkXHsRf
 * [Siah Wee Hung](https://github.com/axwhyzee)
 * [Sua Qi Rong](https://github.com/Soqoro)
 * [Syed Saad](https://github.com/syed0059)
+
+## More Screenshots
+
+![dashboard](https://github.com/weikangg/iNTUition-v9.0/blob/996ac67725c98ba5a3f4b53aad989df996fef33e/frontend/src/assets/dashboardSS.png "title-1") ![calendar](https://github.com/weikangg/iNTUition-v9.0/blob/996ac67725c98ba5a3f4b53aad989df996fef33e/frontend/src/assets/calendarSS.png "title-2")
