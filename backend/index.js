@@ -289,7 +289,7 @@ app.delete('/deleteTask/', async(req,res) =>{
 
 const startServer = async () => {
     try {
-        connectDB('mongodb+srv://wchong036:ninabedog1@cluster0.9nhomnm.mongodb.net/?retryWrites=true&w=majority');
+        connectDB(process.env.MONGODB_URL);
         app.listen(8080, () => {
             console.log('Server started on port http://localhost:8080');
         })
