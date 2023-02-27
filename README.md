@@ -1,6 +1,6 @@
 # Jiraji - Making project management easier for all.
 
-![image](https://user-images.githubusercontent.com/95838788/221418240-f1f77633-fc1b-40ff-b68f-5c0b12e2f445.jpg)
+![image](https://github.com/weikangg/iNTUition-v9.0/blob/5037350647fbf441d0c9b1a5ed10d4d49c411549/frontend/src/assets/loginpageSS.png)
 
 ## ❓ Overview
 
