@@ -2,7 +2,7 @@
 
 <p>
   <img src="https://github.com/weikangg/iNTUition-v9.0/blob/5037350647fbf441d0c9b1a5ed10d4d49c411549/frontend/src/assets/loginpageSS.png" width="50%" /> 
-  <img src="https://github.com/weikangg/iNTUition-v9.0/blob/main/frontend/src/assets/dashboardSS.pn" width="50%" />
+  <img src="https://github.com/weikangg/iNTUition-v9.0/blob/main/frontend/src/assets/dashboardSS.png" width="50%" />
 </p>
 
 ## ❓ Overview
